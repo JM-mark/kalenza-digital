@@ -1,8 +1,9 @@
 # Monta as folhas-resumo de capturas/v2 a partir das capturas por seção (rodar depois do section_caps.js).
 #   python resumo.py  →  resumo-desktop-1.jpg, resumo-desktop-2.jpg (2×3, 720×450) e resumo-mobile.jpg (5×2, 390×844)
-import glob, os
+import glob, os, sys
 from PIL import Image
-D = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'capturas', 'v2')
+LANG = sys.argv[1] if len(sys.argv) > 1 else 'pt'  # python resumo.py [pt|en|ar]
+D = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'capturas', 'v2', *([] if LANG == 'pt' else [LANG]))
 GAP, BG = 12, (138, 133, 125)
 def sheet(files, cols, rows, w, h, out):
     im = Image.new('RGB', (cols * w + (cols - 1) * GAP, rows * h + (rows - 1) * GAP), BG)

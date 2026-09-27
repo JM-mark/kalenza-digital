@@ -3,13 +3,15 @@ import pfPt from '../i18n/portfolio-pt.json';
 import pfEn from '../i18n/portfolio-en.json';
 import pfAr from '../i18n/portfolio-ar.json';
 import sitePt from '../i18n/site-pt.json';
+import siteEn from '../i18n/site-en.json';
+import siteAr from '../i18n/site-ar.json';
 
-// Textos nativos do portfólio + textos próprios do site. EN e AR ganham o site-*.json na etapa 4.
+// Textos nativos do portfólio + textos próprios do site (site-*.json).
 const PORTFOLIO = { pt: pfPt, en: pfEn, ar: pfAr };
-const SITE_COPY: Partial<Record<Lang, typeof sitePt>> = { pt: sitePt };
+const SITE_COPY: Record<Lang, typeof sitePt> = { pt: sitePt, en: siteEn, ar: siteAr };
 
 export function t(lang: Lang) {
-  const site = SITE_COPY[lang] ?? sitePt;
+  const site = SITE_COPY[lang];
   // a mensagem pronta do WhatsApp do site é diferente da do PDF
   return { ...PORTFOLIO[lang], wa_text: site.wa_text, site };
 }

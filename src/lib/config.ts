@@ -9,12 +9,12 @@ export const SITE = {
   whatsappDisplay: '+55 19 99742-9372',
 };
 
-// Idiomas publicados. O AR entra no ar junto com o projeto conceitual.
+// Idiomas publicados.
 export const LANGS = ['pt', 'en', 'ar'] as const;
 export type Lang = (typeof LANGS)[number];
-export const BUILD_LANGS: Lang[] = ['pt'];
-// Idiomas no seletor do header. O árabe entra quando a versão AR for ao ar.
-export const SELECTOR_LANGS: Lang[] = ['pt', 'en'];
+export const BUILD_LANGS: Lang[] = ['pt', 'en', 'ar'];
+// Idiomas no seletor do header.
+export const SELECTOR_LANGS: Lang[] = ['pt', 'en', 'ar'];
 
 export const HREFLANG: Record<Lang, string> = { pt: 'pt-BR', en: 'en', ar: 'ar' };
 

@@ -50,7 +50,6 @@ html.intro { --intro: 320ms; }
   .ha__r2, .ha__r3, .ha__r4, .ha__dot, .ha__k { display: none; }
   .ha__r1 { animation: none; }
 }
-html[dir='rtl'] .ha { inset-inline-end: auto; inset-inline-start: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); }
 @media (min-width: 1100px) {
   .hero { max-width: 56%; }
   .hero__title { max-width: none; font-size: calc(clamp(2.9rem, 6vw, 6.4rem) * var(--display-scale)); }
@@ -148,7 +147,8 @@ html[dir='rtl'] .vband--hero .vband__scrim { background:
   .pj--feature .pj__meta .h2 { font-size: calc(clamp(2.2rem, 3.6vw, 3.4rem) * var(--display-scale)); }
 }
 .pj { display: grid; gap: 22px; align-content: start; }
-.pj__stage { position: relative; padding-bottom: 28px; padding-inline-end: 34px; }
+/* o mockup mostra sites em LTR: no árabe ele mantém a montagem original (celular à direita) */
+.pj__stage { direction: ltr; position: relative; padding-bottom: 28px; padding-inline-end: 34px; }
 .pj__browser { position: relative; background: #fff; border-radius: 10px; overflow: hidden;
   box-shadow: 0 50px 90px -46px rgba(11, 15, 23, .55), 0 0 0 1px rgba(16, 21, 31, .07); }
 .pj__bar { display: flex; gap: 6px; padding: 10px 14px; background: #ECE6DC; }

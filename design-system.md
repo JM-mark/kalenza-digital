@@ -158,7 +158,8 @@ A página ficou cerca de 30% mais curta que na v1. Medido com `_ferramentas/meas
   Todos em H.264, sem áudio. O pôster WebP tem no máximo 120 KB.
 
 ## 8. Idiomas e SEO
-- As rotas `/pt/`, `/en/` e `/ar/` saem de `pages/[lang]`, e `BUILD_LANGS` em `lib/config.ts` controla o que é publicado. O AR entra junto com o projeto conceitual.
+- As rotas `/pt/`, `/en/` e `/ar/` saem de `pages/[lang]`, e `BUILD_LANGS` em `lib/config.ts` controla o que é publicado (hoje os três). Textos próprios do site em `i18n/site-{pt,en,ar}.json`.
+- **RTL:** a peça do hero usa só `inset-inline-end` (fica oposta ao texto nos dois sentidos); números compostos como "03 / 05" vão em `.ltr`; o mockup de projeto (`.pj__stage`) é sempre LTR, porque mostra sites em LTR.
 - **Detecção de idioma:**
   - na raiz, o `_redirects` da Netlify usa o `Accept-Language`;
   - como reserva, um script JS considera a escolha salva, o `?lang=` e o idioma do navegador.

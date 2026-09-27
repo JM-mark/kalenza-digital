@@ -1,8 +1,9 @@
 // Uma captura por seção da Home (desktop 1440 e celular 390), rolando até cada seção como um visitante.
-//   node section_caps.js  →  ../kalenza-site/capturas/v2/{desktop|mobile}-NN-secao.png
+//   node section_caps.js [pt|en|ar]  →  capturas/v2/{desktop|mobile}-NN-secao.png (PT) ou capturas/v2/{en|ar}/…
 const fs = require('fs'); const path = require('path');
 const { chromium } = require('playwright');
-const OUT = path.join(__dirname, '..', 'capturas', 'v2');
+const LANG = process.argv[2] || 'pt';
+const OUT = path.join(__dirname, '..', 'capturas', 'v2', ...(LANG === 'pt' ? [] : [LANG]));
 const SECTIONS = [
   ['hero', '#inicio', 0], ['sobre', '#sobre', 0], ['servicos', '#servicos', 0], ['servicos-hover', '#servicos', 0, 'hover-sv'],
   ['projetos-faixa', '#projetos', 0], ['projetos', '.work2', 40], ['projetos-hover', '.work2', 40, 'hover-pj'],
@@ -19,7 +20,7 @@ const DEV = {
     const ctx = await b.newContext(opt);
     await ctx.addInitScript(() => sessionStorage.setItem('kz-intro', '1')); // sem a abertura nas capturas de seção
     const p = await ctx.newPage();
-    await p.goto('http://localhost:4321/pt/', { waitUntil: 'networkidle' });
+    await p.goto(`http://localhost:4321/${LANG}/`, { waitUntil: 'networkidle' });
     await p.waitForTimeout(1500);
     let n = 0;
     for (const [name, sel, off, action] of SECTIONS) {

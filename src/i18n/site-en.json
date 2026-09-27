@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "title": "Kalenza Digital · Websites, brand identity, design and marketing strategy",
+    "description": "A studio for websites, brand identity, design and marketing strategy. We pair aesthetics with strategy so every brand is perceived for what it is truly worth."
+  },
+  "skip": "Skip to content",
+  "nav": {
+    "sobre": "About",
+    "servicos": "Services",
+    "trabalhos": "Projects",
+    "processo": "Process",
+    "contato": "Contact",
+    "cta": "Let's talk",
+    "menu": "Menu",
+    "close": "Close",
+    "lang": "Language"
+  },
+  "hero": {
+    "eyebrow": "Kalenza Digital",
+    "title": "Brands designed <i>to be chosen.</i>",
+    "lead": "Websites, brand identity, design and marketing strategy for brands that want to be perceived for what they are truly worth.",
+    "primary": "See projects",
+    "secondary": "Chat on WhatsApp",
+    "scroll": "Scroll"
+  },
+  "work": {
+    "cta": "View project",
+    "all": "Talk about your project",
+    "sector": "Sector",
+    "type": "Type",
+    "next": "Next project",
+    "back": "All projects",
+    "shots": "Screens",
+    "mobile": "Mobile version",
+    "live": "Visit site"
+  },
+  "contact": {
+    "whatsapp": "WhatsApp",
+    "wa_title": "Talk to us on WhatsApp",
+    "wa_text": "Speak with us directly. We reply within 24 hours, in English, Portuguese or Arabic.",
+    "wa_button": "Start a conversation",
+    "email": "Email",
+    "instagram": "Instagram",
+    "soon": "coming soon",
+    "form_title": "Or leave a message",
+    "name": "Name",
+    "mail": "Email",
+    "message": "Message",
+    "send": "Send message",
+    "note": "We reply within 24 hours."
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "top": "Back to top"
+  },
+  "wa_float": "Chat on WhatsApp",
+  "thanks": {
+    "title": "Message <i>received.</i>",
+    "text": "Thank you for getting in touch. We reply within 24 hours.",
+    "back": "Back to home"
+  },
+  "wa_text": "Hello! I found Kalenza Digital's website and would like to talk about a project.",
+  "services_short": [
+    "Corporate sites, landing pages, catalogues and e-commerce, fast and refined.",
+    "Logo, palette, typography and brand guide for an identity that holds together at every touchpoint.",
+    "Social posts, catalogues, presentations and print in the same standard as the website.",
+    "Planning, positioning, social media and campaigns with a clear direction."
+  ],
+  "services_open": "See details"
+}
