@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Studio Marvessa · Marketing e conteúdo (demonstração)</title>
+<meta name="description" content="Demonstração: site institucional multilíngue para uma agência de marketing fictícia.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0D1726">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0D1726; --ink-2: #16243A; --paper: #EEE8DE; --paper-2: #E4DCCD; --accent: #5B7CFA; --accent-2: #2C47C9;
+  --muted: #A9B0BC; --line: rgba(238, 232, 222, .18);
+  --serif: 'Newsreader', Georgia, serif; --sans: 'Figtree', system-ui, sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--ink); color: var(--paper); font: 400 16px/1.65 var(--sans); -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; letter-spacing: -.035em; line-height: .98; }
+p { margin: 0; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); }
+.kicker { font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
+.pill { display: inline-flex; padding: 6px 14px; border: 1px solid currentColor; border-radius: 999px; font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+
+/* header em cápsula que muda de tom conforme o fundo */
+.hdr { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 50; width: min(1100px, calc(100% - 28px));
+  display: flex; align-items: center; gap: 24px; padding: 10px 12px 10px 22px; border-radius: 999px;
+  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  transition: background .5s var(--ease), color .5s var(--ease), box-shadow .5s var(--ease); }
+.hdr[data-tone="light"] { background: rgba(238, 232, 222, .92); color: var(--ink); box-shadow: 0 16px 40px -18px rgba(13, 23, 38, .45); border-color: rgba(13, 23, 38, .08); }
+.logo { font-family: var(--serif); font-size: 22px; letter-spacing: -.02em; line-height: 1; display: flex; align-items: center; gap: 8px; }
+.logo i { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: inline-grid; place-items: center; font-style: normal; font-family: var(--sans); font-size: 12px; font-weight: 700; color: #fff; }
+.hdr nav { display: none; gap: 26px; margin-inline: auto; font-size: 13px; font-weight: 600; }
+.hdr nav a { opacity: .85; } .hdr nav a:hover { opacity: 1; color: var(--accent); }
+.hdr .end { margin-left: auto; display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 700; }
+.hdr .langs span { opacity: .55; } .hdr .langs b { font-weight: 700; }
+.hdr .cta { padding: 9px 16px; border-radius: 999px; border: 1px solid currentColor; }
+@media (min-width: 900px) { .hdr nav { display: flex; } .hdr .end { margin-left: 0; } }
+.hdr .cta { white-space: nowrap; }
+@media (max-width: 600px) { .hdr .langs { display: none; } .hdr { gap: 12px; } }
+
+/* palco: um fundo fixo que acompanha o hero e o Sobre */
+.stage { position: relative; }
+.stage-bg { position: absolute; inset: 0; pointer-events: none; }
+.stage-bg .sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+.stage-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; transform: scale(1.06); animation: zoom 16s var(--ease) forwards; }
+.stage-bg .scrim { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(13, 23, 38, .92) 0%, rgba(13, 23, 38, .7) 45%, rgba(13, 23, 38, .35) 100%), linear-gradient(0deg, rgba(13, 23, 38, .9), transparent 40%); }
+@keyframes zoom { to { transform: none; } }
+
+.hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; padding-bottom: clamp(48px, 8vh, 96px); }
+.hero h1 { font-size: clamp(3rem, 7.4vw, 6.6rem); max-width: 10.5em; margin-top: 22px; }
+.hero .lead { max-width: 30em; margin-top: 26px; font-size: clamp(15px, 1.3vw, 18px); color: #D6DBE4; }
+.btns { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; margin-top: 34px; }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 20px; font-size: 13px; font-weight: 700; background: var(--paper); color: var(--ink); transition: transform .4s var(--ease), background .4s; }
+.btn:hover { transform: translateY(-2px); background: var(--accent); color: #fff; }
+.btn.line { background: none; color: inherit; padding: 6px 0; border-bottom: 1px solid currentColor; }
+.chip { position: absolute; left: clamp(20px, 4vw, 48px); bottom: 26px; font: italic 14px var(--serif); padding: 10px 16px; border: 1px solid var(--line); display: none; }
+@media (min-width: 900px) { .chip { display: block; } }
+
+.about { position: relative; min-height: 100vh; display: flex; align-items: center; padding-block: 120px; }
+.about h2 { font-size: clamp(2.6rem, 5.6vw, 5rem); max-width: 11em; margin-top: 22px; }
+.about .cols { margin-top: 30px; max-width: 42em; display: grid; gap: 16px; color: #D6DBE4; }
+.pillars { display: flex; flex-wrap: wrap; gap: 40px 64px; margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); max-width: 760px; }
+.pillars b { display: block; font: 400 34px/1 var(--serif); letter-spacing: -.02em; }
+.pillars span { display: block; margin-top: 8px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+
+/* nichos (fundo claro) com marquee */
+.niches { background: linear-gradient(180deg, var(--paper), var(--paper-2)); color: var(--ink); padding-block: clamp(96px, 12vw, 150px); overflow: hidden; }
+.niches h2 { font-size: clamp(2.6rem, 5.6vw, 5rem); max-width: 12em; margin-top: 22px; color: var(--accent-2); }
+.tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.tags span { padding: 7px 14px; border: 1px solid rgba(13, 23, 38, .2); border-radius: 999px; font-size: 12px; }
+.marquee { margin-top: 56px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.track { display: flex; gap: 16px; width: max-content; animation: marquee 60s linear infinite; }
+.marquee:hover .track { animation-play-state: paused; }
+.card-n { height: 84px; min-width: 190px; padding: 0 28px; display: grid; place-items: center; background: #fff; border-radius: 14px; font: 400 22px/1 var(--serif); letter-spacing: -.02em; color: rgba(13, 23, 38, .7); box-shadow: 0 10px 30px -18px rgba(13, 23, 38, .35); transition: transform .3s, color .3s; }
+.card-n:hover { transform: translateY(-3px); color: var(--accent-2); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* serviços */
+.services { padding-block: clamp(96px, 12vw, 150px); }
+.services h2 { font-size: clamp(2.6rem, 5.6vw, 5rem); max-width: 12em; margin-top: 22px; }
+.svc { margin-top: 56px; border-top: 1px solid var(--line); }
+.svc a { display: grid; grid-template-columns: 60px 1fr; gap: 6px 24px; padding: 30px 0; border-bottom: 1px solid var(--line); transition: padding .5s var(--ease), background .5s; }
+.svc a:hover { padding-inline: 12px; background: rgba(91, 124, 250, .08); }
+.svc .n { font: italic 20px var(--serif); color: var(--accent); }
+.svc h3 { font-size: clamp(1.8rem, 3vw, 2.6rem); }
+.svc p { grid-column: 2; color: var(--muted); max-width: 40em; }
+@media (min-width: 900px) { .svc a { grid-template-columns: 80px 1fr 1fr; align-items: baseline; } .svc p { grid-column: 3; } }
+
+/* projetos: cinza → cor no hover */
+.work { background: var(--paper); color: var(--ink); padding-block: clamp(96px, 12vw, 150px); }
+.work h2 { font-size: clamp(2.6rem, 5.6vw, 5rem); margin-top: 22px; color: var(--accent-2); }
+.grid { display: grid; gap: 18px; margin-top: 48px; grid-template-columns: 1fr; }
+@media (min-width: 700px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+.pc { height: 300px; overflow: hidden; border: 1px solid rgba(13, 23, 38, .15); background: #fff; transition: transform .25s, background .25s; }
+.pc img { width: 100%; height: 200px; object-fit: cover; filter: grayscale(1); transition: filter .4s, transform .5s; }
+.pc:hover { transform: translateY(-4px); }
+.pc:hover img { filter: none; transform: scale(1.03); }
+.pc div { padding: 16px 18px; }
+.pc b { display: block; font: 400 22px/1.1 var(--serif); letter-spacing: -.02em; }
+.pc span { font-size: 12px; color: #5a6270; }
+
+/* contato */
+.contact { padding-block: clamp(96px, 12vw, 150px); background: var(--ink-2); }
+.contact h2 { font-size: clamp(2.8rem, 6.4vw, 5.8rem); max-width: 10em; margin-top: 22px; }
+.contact .lines { display: grid; gap: 18px; margin-top: 44px; }
+.contact .lines a { font: 400 clamp(1.6rem, 3vw, 2.6rem)/1 var(--serif); letter-spacing: -.02em; transition: color .2s; }
+.contact .lines a:hover { color: var(--accent); }
+footer { padding: 28px 0 40px; font-size: 12px; color: var(--muted); }
+
+/* entradas: título palavra por palavra, blocos que sobem */
+.split .w { display: inline-block; }
+.js .split:not(.in) .w { opacity: 0; transform: translateY(.45em); }
+.split.in .w { animation: word .8s var(--ease) calc(min(var(--i), 16) * 55ms + var(--b, 0ms)) backwards; }
+@keyframes word { from { opacity: 0; transform: translateY(.45em); } to { opacity: 1; transform: none; } }
+.js .rv:not(.in) { opacity: 0; transform: translateY(28px); }
+.rv.in { animation: rise .8s var(--ease) var(--d, 0ms) backwards; }
+@keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+.wa { position: fixed; right: 18px; bottom: 18px; z-index: 40; width: 56px; height: 56px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; color: #fff; }
+.wa::before { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--accent); animation: pulse 2.6s ease-out infinite; }
+@keyframes pulse { 0% { transform: scale(1); opacity: .55; } 70%, 100% { transform: scale(1.3); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .js .split:not(.in) .w, .js .rv:not(.in) { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<header class="hdr" id="hdr" data-tone="dark">
+  <a class="logo" href="#inicio"><i>M</i>Marvessa</a>
+  <nav><a href="#sobre">Sobre</a><a href="#servicos">Serviços</a><a href="#nichos">Nichos</a><a href="#projetos">Projetos</a><a href="#contato">Contato</a></nav>
+  <div class="end"><span class="langs"><b>PT</b> <span>EN · ES</span></span><a class="cta" href="#contato">Vamos conversar</a></div>
+</header>
+
+<main>
+<div class="stage">
+  <div class="stage-bg" aria-hidden="true"><div class="sticky"><img src="img/p19715764.jpg" alt=""><div class="scrim"></div></div></div>
+  <section class="hero" id="inicio" data-tone="dark">
+    <div class="wrap">
+      <p class="kicker rv" style="--d:100ms">Marketing e conteúdo · atuação internacional</p>
+      <h1 class="split" data-split style="--b:200ms">Estratégia e conteúdo para marcas que atravessam fronteiras.</h1>
+      <p class="lead rv" style="--d:700ms">Posicionamento, redes sociais e campanhas para marcas que querem ser lembradas em qualquer mercado.</p>
+      <div class="btns rv" style="--d:850ms"><a class="btn" href="#contato">Vamos conversar ↗</a><a class="btn line" href="#sobre">Conheça o estúdio ↓</a></div>
+    </div>
+    <p class="chip">Estratégia com forma.</p>
+  </section>
+  <section class="about" id="sobre" data-tone="dark">
+    <div class="wrap">
+      <span class="pill rv">Sobre nós</span>
+      <h2 class="split" data-split>Um estúdio local com olhar global.</h2>
+      <div class="cols rv"><p>Somos um estúdio de marketing e conteúdo que ajuda marcas a se comunicar com públicos de diferentes países, culturas e idiomas.</p>
+        <p>Unimos planejamento, direção criativa e gestão de redes para transformar posicionamento em presença digital consistente.</p></div>
+      <div class="pillars rv"><div><b>Planejar</b><span>posicionamento</span></div><div><b>Criar</b><span>conteúdo e campanhas</span></div><div><b>Crescer</b><span>gestão contínua</span></div></div>
+    </div>
+  </section>
+</div>
+
+<section class="niches" id="nichos" data-tone="light">
+  <div class="wrap">
+    <span class="pill rv">Nichos</span>
+    <h2 class="split" data-split>Experiência que muda de contexto sem perder força.</h2>
+    <div class="tags rv"><span>Beleza</span><span>Moda</span><span>Gastronomia</span><span>Turismo</span><span>Saúde</span><span>Eventos</span></div>
+  </div>
+  <div class="marquee rv"><div class="track">
+    <span class="card-n">Beleza</span><span class="card-n">Moda autoral</span><span class="card-n">Hotelaria</span><span class="card-n">Gastronomia</span><span class="card-n">Bem-estar</span><span class="card-n">Arquitetura</span><span class="card-n">Eventos</span><span class="card-n">Design</span>
+    <span class="card-n" aria-hidden="true">Beleza</span><span class="card-n" aria-hidden="true">Moda autoral</span><span class="card-n" aria-hidden="true">Hotelaria</span><span class="card-n" aria-hidden="true">Gastronomia</span><span class="card-n" aria-hidden="true">Bem-estar</span><span class="card-n" aria-hidden="true">Arquitetura</span><span class="card-n" aria-hidden="true">Eventos</span><span class="card-n" aria-hidden="true">Design</span>
+  </div></div>
+</section>
+
+<section class="services" id="servicos" data-tone="dark">
+  <div class="wrap">
+    <span class="pill rv">Serviços</span>
+    <h2 class="split" data-split>Do plano à publicação.</h2>
+    <div class="svc">
+      <a class="rv" href="#contato"><span class="n">01</span><h3>Estratégia de marca</h3><p>Posicionamento, tom de voz e plano de comunicação para cada mercado.</p></a>
+      <a class="rv" href="#contato"><span class="n">02</span><h3>Redes sociais</h3><p>Calendário, criação e gestão de conteúdo em vários idiomas.</p></a>
+      <a class="rv" href="#contato"><span class="n">03</span><h3>Campanhas</h3><p>Lançamentos e ações sazonais com direção criativa própria.</p></a>
+      <a class="rv" href="#contato"><span class="n">04</span><h3>Produção de conteúdo</h3><p>Fotografia, vídeo curto e roteiros pensados para cada plataforma.</p></a>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="projetos" data-tone="light">
+  <div class="wrap">
+    <span class="pill rv">Projetos</span>
+    <h2 class="split" data-split>Ideias que ganham forma.</h2>
+    <div class="grid">
+      <a class="pc rv" href="#contato"><img src="img/p18893526.jpg" alt="" loading="lazy"><div><b>Cidade vertical</b><span>Campanha · arquitetura</span></div></a>
+      <a class="pc rv" style="--d:80ms" href="#contato"><img src="img/p11839273.jpg" alt="" loading="lazy"><div><b>Luz da tarde</b><span>Conteúdo · hotelaria</span></div></a>
+      <a class="pc rv" style="--d:160ms" href="#contato"><img src="img/p10506543.jpg" alt="" loading="lazy"><div><b>Janela urbana</b><span>Redes sociais · design</span></div></a>
+      <a class="pc rv" style="--d:240ms" href="#contato"><img src="img/p19328891.jpg" alt="" loading="lazy"><div><b>Materiais</b><span>Direção criativa · interiores</span></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contato" data-tone="dark">
+  <div class="wrap">
+    <span class="pill rv">Contato</span>
+    <h2 class="split" data-split>Pronto para ocupar novos mercados?</h2>
+    <div class="lines rv"><a href="#contato">Fale com o estúdio ↗</a><a href="#contato">Agende uma conversa ↗</a></div>
+  </div>
+</section>
+</main>
+<footer data-tone="dark"><div class="wrap">© 2026 Studio Marvessa · marca fictícia criada para demonstração.</div></footer>
+<a class="wa" href="#contato" aria-label="Conversar"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 5h16v11H9l-5 4z"/></svg></a>
+
+<script>
+(function () {
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-split]').forEach(function (h) {
+    var i = 0; h.innerHTML = h.textContent.trim().split(/\s+/).map(function (w) { return '<span class="w" style="--i:' + (i++) + '">' + w + '</span>'; }).join(' ');
+  });
+  var els = document.querySelectorAll('[data-split], .rv');
+  if (reduce || !('IntersectionObserver' in window)) els.forEach(function (e) { e.classList.add('in'); });
+  else { var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' }); els.forEach(function (e) { io.observe(e); }); }
+  var hdr = document.getElementById('hdr'), secs = [].slice.call(document.querySelectorAll('[data-tone]')).filter(function (s) { return s !== hdr; }), t = false;
+  function paint() { t = false; var y = 40, tone = 'dark'; for (var k = 0; k < secs.length; k++) { var r = secs[k].getBoundingClientRect(); if (r.top <= y && r.bottom > y) { tone = secs[k].dataset.tone; break; } } hdr.dataset.tone = tone; }
+  addEventListener('scroll', function () { if (!t) { t = true; requestAnimationFrame(paint); } }, { passive: true }); paint();
+})();
+</script>
+</body>
+</html>

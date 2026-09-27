@@ -1,0 +1,223 @@
+{
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "wa_text": "Olá! Vi o portfólio da Kalenza Digital e quero conversar sobre um projeto.",
+  "footer": "Portfólio 2026",
+  "cover": {
+    "eyebrow": "Portfólio 2026",
+    "title": "Marcas desenhadas <i>para serem escolhidas.</i>",
+    "fronts": [
+      "Sites",
+      "Identidade visual",
+      "Design",
+      "Estratégia de marketing"
+    ]
+  },
+  "about": {
+    "eyebrow": "Sobre nós",
+    "title": "Construímos marcas que transmitem valor <i>à primeira vista.</i>",
+    "cols": [
+      {
+        "h": "Quem somos",
+        "p": "Uma agência de sites, identidade visual, design e marketing. Unimos estética e estratégia para que cada marca seja percebida pelo que realmente vale."
+      },
+      {
+        "h": "Como trabalhamos",
+        "p": "Começamos pelo negócio, não pela tela. Cada decisão visual responde a um objetivo claro: credibilidade, clareza ou conversão."
+      },
+      {
+        "h": "Três idiomas",
+        "p": "Atendemos em português, inglês e árabe, com sites bilíngues em layout da direita para a esquerda. Uma vantagem real para quem vende ao Oriente Médio."
+      }
+    ]
+  },
+  "services": {
+    "eyebrow": "Serviços",
+    "title": "Quatro frentes, <i>uma só marca.</i>",
+    "items": [
+      {
+        "h": "Sites",
+        "p": "Sites institucionais, landing pages, catálogos online e e-commerce. Rápidos, elegantes e pensados para transformar visitas em conversas.",
+        "list": [
+          "Institucional",
+          "Landing page",
+          "Catálogo online",
+          "E-commerce"
+        ],
+        "note": "Também em versões bilíngues AR · PT · EN, com layout RTL."
+      },
+      {
+        "h": "Identidade visual",
+        "p": "Logo, paleta, tipografia e guia de marca. Uma identidade coerente que eleva a percepção de valor em cada ponto de contato.",
+        "list": [
+          "Logo e monograma",
+          "Paleta e tipografia",
+          "Guia de marca"
+        ]
+      },
+      {
+        "h": "Design",
+        "p": "Posts, catálogos, apresentações comerciais, tabelas de preço e impressos. Materiais que vendem com o mesmo padrão do site.",
+        "list": [
+          "Redes sociais",
+          "Catálogos",
+          "Apresentações",
+          "Tabelas de preço",
+          "Impressos"
+        ]
+      },
+      {
+        "h": "Estratégia de marketing",
+        "p": "Planejamento, posicionamento, gestão de redes sociais e campanhas. Direção clara para a marca crescer com consistência.",
+        "list": [
+          "Planejamento",
+          "Posicionamento",
+          "Gestão de redes",
+          "Campanhas"
+        ]
+      }
+    ]
+  },
+  "index": {
+    "eyebrow": "Projetos selecionados",
+    "title": "Projetos que mostram <i>como pensamos.</i>"
+  },
+  "labels": {
+    "case": "Projeto",
+    "concept": "Projeto conceitual",
+    "context": "O desafio",
+    "did": "O que fizemos",
+    "deliverables": "Entregáveis",
+    "result": "Decisões de design",
+    "identity": "Identidade visual",
+    "gallery": "Em detalhe",
+    "languages": {
+      "pt": "Português",
+      "en": "English",
+      "es": "Español",
+      "ar": "العربية"
+    }
+  },
+  "cases": {
+    "ulia": {
+      "title": "Agência de marketing digital",
+      "kind": "Site institucional · Direção visual",
+      "sector": "Ülia Media · site no ar em uliamedia.com",
+      "context": "Como apresentar uma agência que leva marcas brasileiras a feiras e mercados de vários países, com a mesma clareza em cada seção?",
+      "did": "Desenhamos um site editorial do manifesto ao contato, com o wordmark da Ülia como ponto de partida: serviços em índice, processo em três passos, cases e produção audiovisual.",
+      "deliverables": [
+        "Site institucional",
+        "Direção visual",
+        "Versão mobile"
+      ],
+      "design": "Bordô profundo, branco e tons rosados, com o laranja reservado para as ações; uma serifa de alto contraste conversa com o desenho do logo."
+    },
+    "marvessa": {
+      "title": "Agência de marketing",
+      "kind": "Site institucional multilíngue",
+      "sector": "Projeto autoral · marca fictícia Studio Marvessa",
+      "context": "Como apresentar uma agência que trabalha com marcas de vários países, com a mesma força em cada idioma?",
+      "did": "Desenhamos um site editorial com cabeçalho em cápsula, títulos que entram palavra por palavra e um fundo que acompanha a leitura.",
+      "deliverables": [
+        "Site institucional",
+        "Versões PT · EN · ES",
+        "Versão mobile"
+      ],
+      "design": "Serifa condensada, azul-cobalto sobre tinta e trechos claros que dão ritmo à leitura."
+    },
+    "ambrevel": {
+      "title": "Perfumaria de luxo",
+      "kind": "Identidade visual · Site · Catálogo",
+      "sector": "Projeto autoral · marca fictícia Maison Ambrevel",
+      "context": "Como traduzir a riqueza da perfumaria oriental em uma marca contemporânea e fácil de apresentar?",
+      "did": "Criamos a marca, um site com coleções e vitrine de lançamentos e um catálogo com a mesma linguagem.",
+      "deliverables": [
+        "Identidade visual",
+        "Site institucional",
+        "Catálogo"
+      ],
+      "identity_title": "Uma marca com <i>calor e requinte.</i>",
+      "identity_text": "Monograma, assinatura e paleta se desdobram no site, no catálogo e nas embalagens.",
+      "design": "Bordô profundo, bronze rosado e uma serifa de alto contraste; fotos escuras deixam os frascos em primeiro plano."
+    },
+    "ondessa": {
+      "title": "Clínica de estética",
+      "kind": "Site · Direção visual",
+      "sector": "Projeto autoral · marca fictícia Clínica Ondessa",
+      "context": "Como transmitir calma e cuidado desde o primeiro clique e levar ao agendamento sem atrito?",
+      "did": "Criamos a direção visual Sálvia & Areia e um site com tratamentos, espaço e agendamento em poucos toques.",
+      "deliverables": [
+        "Direção visual",
+        "Site institucional",
+        "Versão mobile"
+      ],
+      "design": "Verde-sálvia, areia e uma serifa suave; cards revelam a foto de cada tratamento ao passar o cursor."
+    },
+    "ardelis": {
+      "title": "Cosméticos capilares",
+      "kind": "Site institucional · Apresentação comercial",
+      "sector": "Projeto autoral · marca fictícia Ardelis Professional",
+      "context": "Como dar a uma linha profissional para salões uma imagem à altura do cuidado técnico que ela oferece?",
+      "did": "Criamos um sistema visual em verde profundo e cobre e o aplicamos no site e na apresentação comercial.",
+      "deliverables": [
+        "Site institucional",
+        "Apresentação comercial",
+        "Tabela de preços"
+      ],
+      "design": "Monograma circular, serifa clássica e fotos de produto em luz natural, do site ao material de venda."
+    }
+  },
+  "process": {
+    "eyebrow": "Processo",
+    "title": "Do diagnóstico <i>ao crescimento.</i>",
+    "lead": "Um caminho claro, com você acompanhando cada etapa.",
+    "steps": [
+      {
+        "h": "Diagnóstico",
+        "p": "Entendemos o negócio, o público e os objetivos da marca."
+      },
+      {
+        "h": "Estratégia",
+        "p": "Definimos posicionamento, mensagem e os canais que fazem diferença."
+      },
+      {
+        "h": "Criação",
+        "p": "Desenhamos identidade, site e materiais em um só padrão visual."
+      },
+      {
+        "h": "Desenvolvimento",
+        "p": "Colocamos no ar sites rápidos, responsivos e fáceis de gerenciar."
+      },
+      {
+        "h": "Gestão",
+        "p": "Conduzimos redes sociais e campanhas para a marca seguir crescendo."
+      }
+    ]
+  },
+  "why": {
+    "eyebrow": "Por que nós",
+    "title": "Por que a <i>Kalenza Digital.</i>",
+    "points": [
+      {
+        "h": "Estética com estratégia",
+        "p": "Cada decisão visual tem um propósito de negócio: ser lembrada, gerar confiança, vender."
+      },
+      {
+        "h": "Tudo em um só lugar",
+        "p": "Site, identidade, design e marketing falando a mesma língua, sem ruído entre fornecedores."
+      },
+      {
+        "h": "Padrão internacional",
+        "p": "Português, inglês e árabe com o mesmo nível de cuidado, incluindo sites da direita para a esquerda."
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contato",
+    "title": "Sua marca merece<br><i>ser a primeira escolha.</i>",
+    "p": "Conte sobre o seu projeto. Respondemos pelo WhatsApp em até 24 horas.",
+    "button": "Conversar no WhatsApp",
+    "qr": "Aponte a câmera para abrir o WhatsApp",
+    "langs": "Atendemos em português, inglês e árabe."
+  }
+}

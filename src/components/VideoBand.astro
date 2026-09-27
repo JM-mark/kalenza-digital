@@ -1,0 +1,29 @@
+---
+import { BASE } from '../lib/config';
+// Faixa escura com vídeo de fundo (capa da seção). Enquanto os arquivos não existem em
+// public/videos, mostra o placeholder: gradiente Noite + padrão octogonal com deriva lenta.
+// O vídeo só carrega perto da tela, pausa fora dela e nunca carrega com movimento reduzido,
+// economia de dados ou 2G/3G (ver scripts/video.ts).
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import type { VideoName } from '../lib/config';
+
+interface Props { name: VideoName; id?: string; hero?: boolean; labelledby?: string; class?: string }
+const { name, id, hero = false, labelledby, class: cls = '' } = Astro.props;
+const pub = (f: string) => existsSync(join(process.cwd(), 'public', 'videos', f));
+const poster = pub(`${name}-poster.webp`) ? `${BASE}/videos/${name}-poster.webp` : null;
+const video = pub(`${name}-desktop.mp4`) && pub(`${name}-mobile.mp4`);
+---
+<section class:list={['vband', 'dark', hero ? 'vband--hero' : 'vband--band', cls]} data-tone="dark" id={id} aria-labelledby={labelledby}>
+  <div class="vband__media" aria-hidden="true">
+    <div class="vband__ph"><span class="vband__pat"></span><span class="vband__glow"></span></div>
+    {poster && <img class="vband__poster" src={poster} alt="" decoding="async" {...(hero ? { fetchpriority: 'high' } : { loading: 'lazy' })} />}
+    {video && (
+      <video class="vband__video" muted loop playsinline preload="none" disablepictureinpicture
+        data-desktop={`${BASE}/videos/${name}-desktop.mp4`} data-mobile={`${BASE}/videos/${name}-mobile.mp4`} poster={poster ?? undefined}></video>
+    )}
+    <div class="vband__scrim"></div>
+  </div>
+  {Astro.slots.has('art') && <div class="vband__art" aria-hidden="true"><slot name="art" /></div>}
+  <div class="vband__inner wrap"><slot /></div>
+</section>

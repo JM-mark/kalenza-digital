@@ -1,0 +1,14 @@
+---
+// Abertura (primeira visita da sessão, até 1,1 s): o octógono se desenha em linha dourada, o K aparece
+// e a tela se abre em duas metades revelando o hero. Só existe quando o script do <head> marca
+// <html class="intro">; com movimento reduzido nunca aparece. Só CSS, não depende do JavaScript da página.
+import mono from './monogram.svg?raw';
+const svg = mono
+  .replace('<path d=', '<path class="intro__oct" pathLength="100" d=')
+  .replace('<path transform=', '<path class="intro__k" transform=');
+---
+<div class="intro-screen" aria-hidden="true">
+  <div class="intro__half intro__half--a"></div>
+  <div class="intro__half intro__half--b"></div>
+  <div class="intro__mark"><Fragment set:html={svg} /></div>
+</div>

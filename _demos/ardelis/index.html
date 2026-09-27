@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ardelis Professional · Tratamentos capilares profissionais (demonstração)</title>
+<meta name="description" content="Demonstração: site institucional para uma linha fictícia de tratamentos capilares profissionais.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: {
+        deep950: '#0C1E21', deep900: '#143136', deep700: '#1F454B',
+        copper300: '#EBC9A6', copper400: '#D8A477', copper500: '#C38A5B', copper600: '#9C6639',
+        sage400: '#8FB3A6', cream: '#F5F0E8', creamdim: '#E9E1D4', ink: '#152225', textsoft: '#56605E',
+      },
+      fontFamily: { serif: ['"Cormorant Garamond"', 'serif'], sans: ['"Manrope"', 'sans-serif'] },
+    } }
+  }
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { background: #F5F0E8; }
+  .tracked-1 { letter-spacing: 0.14em; } .tracked-2 { letter-spacing: 0.22em; } .tracked-3 { letter-spacing: 0.32em; }
+  .grad-deep { background: linear-gradient(180deg, #143136 0%, #0C1E21 100%); }
+  .grad-deep-soft { background: linear-gradient(180deg, #0C1E21 0%, #143136 55%, #0C1E21 100%); }
+  .mono { position: relative; border-radius: 9999px; border: 1.4px solid var(--ring, #D8A477); display: flex; align-items: center; justify-content: center; }
+  .mono::before { content: ''; position: absolute; inset: 14%; border-radius: 9999px; border: 1px dashed var(--ring, #D8A477); opacity: .7; }
+  .fade-up { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s ease; }
+  .fade-up.in { opacity: 1; transform: none; }
+  .hairline { height: 1px; background: linear-gradient(90deg, currentColor, transparent 85%); opacity: .5; }
+  ::selection { background: #C38A5B; color: #0C1E21; }
+  @media (prefers-reduced-motion: reduce) { .fade-up { opacity: 1; transform: none; transition: none; } }
+</style>
+</head>
+<body class="font-sans text-ink antialiased">
+
+<header class="fixed top-0 inset-x-0 z-50 bg-deep950/95 backdrop-blur border-b border-copper600/20">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+    <a href="#topo" class="flex items-center gap-3">
+      <span class="mono w-8 h-8" style="--ring:#D8A477"><span class="font-serif font-semibold text-copper300" style="font-size:15px">A</span></span>
+      <span class="hidden sm:block text-copper300 text-sm tracked-2 font-sans font-medium">ARDELIS</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-[11px] tracked-1 text-cream/70">
+      <a href="#sobre" class="hover:text-copper300 transition">SOBRE</a>
+      <a href="#linhas" class="hover:text-copper300 transition">LINHAS</a>
+      <a href="#onde-comprar" class="hover:text-copper300 transition">ONDE COMPRAR</a>
+      <a href="#salao" class="hover:text-copper300 transition">PARA O SALÃO</a>
+    </nav>
+    <a href="#contato" class="border border-copper500 text-copper300 text-[11px] tracked-1 px-4 py-2 rounded-full hover:bg-copper500 hover:text-deep950 transition">FALE CONOSCO</a>
+  </div>
+</header>
+
+<section id="topo" class="grad-deep-soft min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 pb-16 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.05]" style="background-image:radial-gradient(circle at 1px 1px, #D8A477 1px, transparent 0); background-size:28px 28px;"></div>
+  <div class="mono w-24 h-24 md:w-28 md:h-28 mb-8 relative fade-up" style="--ring:#D8A477">
+    <span class="font-serif font-medium text-copper300" style="font-size:44px;line-height:1">A</span>
+  </div>
+  <h1 class="fade-up">
+    <span class="block font-serif font-light text-cream leading-none tracked-1" style="font-size:clamp(2.8rem,7.4vw,5rem)">Ardelis</span>
+    <span class="block mt-3 text-copper500 text-xs md:text-sm tracked-3">PROFESSIONAL</span>
+  </h1>
+  <p class="fade-up font-serif italic text-copper300 text-xl md:text-2xl mt-8 max-w-xl">Tratamentos capilares pensados para a rotina do salão.</p>
+  <div class="fade-up flex flex-col sm:flex-row gap-4 mt-10">
+    <a href="#contato" class="border border-copper500 text-copper300 text-xs tracked-1 px-8 py-4 rounded-full hover:bg-copper500 hover:text-deep950 transition">FALE CONOSCO</a>
+    <a href="#linhas" class="text-cream/70 text-xs tracked-1 px-8 py-4 rounded-full border border-cream/20 hover:border-copper500 hover:text-copper300 transition">CONHECER AS LINHAS</a>
+  </div>
+  <p class="absolute bottom-8 text-sage400 text-[10px] tracked-2">LINHA PROFISSIONAL · DEMONSTRAÇÃO</p>
+</section>
+
+<section id="sobre" class="bg-cream py-24 md:py-32 px-6">
+  <div class="max-w-5xl mx-auto">
+    <p class="fade-up text-copper600 text-xs tracked-2 mb-2">SOBRE A LINHA</p>
+    <div class="fade-up w-10 h-px bg-copper500 mb-10"></div>
+    <h2 class="fade-up font-serif font-light text-ink leading-tight mb-8" style="font-size:clamp(2rem,4.2vw,3.2rem)">Cuidado técnico, do lavatório à finalização.</h2>
+    <p class="fade-up text-textsoft leading-relaxed max-w-2xl mb-14" style="font-size:1.05rem">
+      A Ardelis Professional reúne tratamentos de uso profissional pensados para cabeleireiras que
+      trabalham com rigor técnico e querem oferecer uma experiência de cuidado em cada etapa do atendimento.
+    </p>
+    <div class="hairline text-copper500 mb-14"></div>
+    <div class="grid md:grid-cols-2 gap-x-12 gap-y-12">
+      <div class="fade-up flex gap-5"><span class="font-serif font-light text-copper500 text-2xl leading-none">01</span><div><h3 class="font-serif font-semibold text-ink text-xl mb-2">Ativos de origem vegetal</h3><p class="text-textsoft text-sm leading-relaxed">Óleos e manteigas selecionados para nutrir e reconstruir a fibra com toque leve.</p></div></div>
+      <div class="fade-up flex gap-5"><span class="font-serif font-light text-copper500 text-2xl leading-none">02</span><div><h3 class="font-serif font-semibold text-ink text-xl mb-2">Fórmulas sem formol</h3><p class="text-textsoft text-sm leading-relaxed">Toda a linha pensada para o conforto de quem aplica e de quem recebe o tratamento.</p></div></div>
+      <div class="fade-up flex gap-5"><span class="font-serif font-light text-copper500 text-2xl leading-none">03</span><div><h3 class="font-serif font-semibold text-ink text-xl mb-2">Rotina de salão</h3><p class="text-textsoft text-sm leading-relaxed">Rendimento, tempo de pausa e finalização pensados para o dia a dia da cabine.</p></div></div>
+      <div class="fade-up flex gap-5"><span class="font-serif font-light text-copper500 text-2xl leading-none">04</span><div><h3 class="font-serif font-semibold text-ink text-xl mb-2">Protocolos simples</h3><p class="text-textsoft text-sm leading-relaxed">Cada linha acompanha um passo a passo claro para toda a equipe do salão.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="grad-deep py-24 md:py-28 px-6">
+  <div class="max-w-5xl mx-auto">
+    <p class="fade-up text-copper400 text-xs tracked-2 mb-2">PILARES</p>
+    <div class="fade-up w-10 h-px bg-copper600 mb-12"></div>
+    <h2 class="fade-up font-serif font-light text-cream leading-tight mb-16" style="font-size:clamp(1.9rem,3.8vw,2.8rem)">O que guia cada fórmula.</h2>
+    <div class="fade-up grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-0 md:divide-x divide-copper600/30 mb-14">
+      <div class="md:px-6 text-center md:text-left"><p class="font-serif font-light text-copper300 text-3xl md:text-4xl">Nutrir</p><p class="text-cream/60 text-[10px] tracked-1 mt-2">FIBRA E BRILHO</p></div>
+      <div class="md:px-6 text-center md:text-left"><p class="font-serif font-light text-copper300 text-3xl md:text-4xl">Alinhar</p><p class="text-cream/60 text-[10px] tracked-1 mt-2">ANTES DA ESCOVA</p></div>
+      <div class="md:px-6 text-center md:text-left"><p class="font-serif font-light text-copper300 text-3xl md:text-4xl">Selar</p><p class="text-cream/60 text-[10px] tracked-1 mt-2">CUTÍCULA PROTEGIDA</p></div>
+      <div class="md:px-6 text-center md:text-left"><p class="font-serif font-light text-copper300 text-3xl md:text-4xl">Manter</p><p class="text-cream/60 text-[10px] tracked-1 mt-2">CUIDADO EM CASA</p></div>
+    </div>
+    <div class="hairline text-copper600 mb-8"></div>
+    <p class="fade-up text-cream/70 text-sm leading-relaxed max-w-xl">Quatro etapas que acompanham o fio do lavatório até a manutenção entre um atendimento e outro.</p>
+  </div>
+</section>
+
+<section id="linhas" class="bg-cream py-24 md:py-32 px-6">
+  <div class="max-w-5xl mx-auto">
+    <p class="fade-up text-copper600 text-xs tracked-2 mb-2">NOSSAS LINHAS</p>
+    <div class="fade-up w-10 h-px bg-copper500 mb-10"></div>
+    <h2 class="fade-up font-serif font-light text-ink leading-tight mb-16" style="font-size:clamp(2rem,4.2vw,3.2rem)">Quatro linhas, um só padrão de cuidado.</h2>
+    <div class="space-y-16 md:space-y-20">
+      <div class="fade-up grid md:grid-cols-[240px_1fr] gap-8 items-start pb-16 border-b border-creamdim">
+        <img src="img/p19572634.jpg" alt="" class="w-full md:w-[240px] aspect-square object-cover border border-copper500/50">
+        <div><div class="flex items-baseline gap-3 mb-2"><span class="font-serif font-light text-copper500 text-lg">I</span><h3 class="font-serif font-semibold text-ink text-3xl">Óleo Nutritivo</h3></div>
+          <p class="font-serif italic text-copper600 text-lg mb-3">Brilho e maciez para fios ressecados.</p>
+          <p class="text-textsoft text-sm leading-relaxed max-w-xl mb-3">Óleo leve de finalização que nutre o comprimento, controla o frizz e devolve o toque sedoso sem pesar.</p>
+          <p class="font-serif italic text-copper600">Blend de óleos vegetais</p></div>
+      </div>
+      <div class="fade-up grid md:grid-cols-[240px_1fr] gap-8 items-start pb-16 border-b border-creamdim">
+        <img src="img/p7797108.jpg" alt="" class="w-full md:w-[240px] aspect-square object-cover border border-copper500/50">
+        <div><div class="flex items-baseline gap-3 mb-2"><span class="font-serif font-light text-copper500 text-lg">II</span><h3 class="font-serif font-semibold text-ink text-3xl">Sérum Reconstrutor</h3></div>
+          <p class="font-serif italic text-copper600 text-lg mb-3">Força para fios que passaram por química.</p>
+          <p class="text-textsoft text-sm leading-relaxed max-w-xl mb-3">Tratamento concentrado de uso em cabine que repõe massa e prepara o fio para os próximos procedimentos.</p>
+          <p class="font-serif italic text-copper600">Aminoácidos · Manteiga vegetal</p></div>
+      </div>
+      <div class="fade-up grid md:grid-cols-[240px_1fr] gap-8 items-start pb-16 border-b border-creamdim">
+        <img src="img/p7796455.jpg" alt="" class="w-full md:w-[240px] aspect-square object-cover border border-copper500/50">
+        <div><div class="flex items-baseline gap-3 mb-2"><span class="font-serif font-light text-copper500 text-lg">III</span><h3 class="font-serif font-semibold text-ink text-3xl">Pré-Escova Alinhante</h3></div>
+          <p class="font-serif italic text-copper600 text-lg mb-3">O primeiro passo de uma escova impecável.</p>
+          <p class="text-textsoft text-sm leading-relaxed max-w-xl mb-3">Prepara e protege o fio do calor, alinha a cutícula e facilita a escova em fios longos e volumosos.</p>
+          <p class="font-serif italic text-copper600">Proteção térmica · Complexo alinhante</p></div>
+      </div>
+      <div class="fade-up grid md:grid-cols-[240px_1fr] gap-8 items-start">
+        <img src="img/p8054327.jpg" alt="" class="w-full md:w-[240px] aspect-square object-cover border border-copper500/50">
+        <div><div class="flex items-baseline gap-3 mb-2"><span class="font-serif font-light text-copper500 text-lg">IV</span><h3 class="font-serif font-semibold text-ink text-3xl">Tônico de Raiz</h3></div>
+          <p class="font-serif italic text-copper600 text-lg mb-3">Cuidado que começa no couro cabeludo.</p>
+          <p class="text-textsoft text-sm leading-relaxed max-w-xl mb-3">Tônico de aplicação diária que equilibra a raiz e complementa o tratamento feito no salão.</p>
+          <p class="font-serif italic text-copper600">Extratos botânicos · Uso diário</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="onde-comprar" class="grad-deep py-24 md:py-32 px-6">
+  <div class="max-w-4xl mx-auto">
+    <p class="fade-up text-copper400 text-xs tracked-2 mb-2">ONDE COMPRAR</p>
+    <div class="fade-up w-10 h-px bg-copper600 mb-14"></div>
+    <div class="divide-y divide-copper600/25">
+      <a href="#contato" class="fade-up group flex flex-col md:flex-row md:items-center md:justify-between py-8 gap-2"><div><h3 class="font-serif text-cream text-2xl mb-1">Atendimento ao salão</h3><p class="text-cream/60 text-sm">Pedidos, dúvidas técnicas e montagem de kits profissionais.</p></div><span class="text-copper400 text-sm group-hover:text-copper300 transition whitespace-nowrap">Fale conosco</span></a>
+      <a href="#contato" class="fade-up group flex flex-col md:flex-row md:items-center md:justify-between py-8 gap-2"><div><h3 class="font-serif text-cream text-2xl mb-1">Distribuidores</h3><p class="text-cream/60 text-sm">Condições para revenda e reposição de estoque.</p></div><span class="text-copper400 text-sm group-hover:text-copper300 transition whitespace-nowrap">Seja um parceiro</span></a>
+      <a href="#contato" class="fade-up group flex flex-col md:flex-row md:items-center md:justify-between py-8 gap-2"><div><h3 class="font-serif text-cream text-2xl mb-1">Loja online</h3><p class="text-cream/60 text-sm">Linha de manutenção para uso em casa.</p></div><span class="text-copper400 text-sm group-hover:text-copper300 transition whitespace-nowrap">Em breve</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="salao" class="bg-cream py-24 md:py-32 px-6">
+  <div class="max-w-3xl mx-auto">
+    <p class="fade-up text-copper600 text-xs tracked-2 mb-2">PARA O SALÃO</p>
+    <div class="fade-up w-10 h-px bg-copper500 mb-10"></div>
+    <h2 class="fade-up font-serif font-light text-ink leading-tight mb-4" style="font-size:clamp(2rem,4.2vw,3.2rem)">Protocolos que a equipe aprende rápido.</h2>
+    <p class="fade-up text-textsoft leading-relaxed max-w-xl mb-14">Cada linha vem com fichas técnicas e um passo a passo pensado para padronizar o atendimento.</p>
+    <div class="hairline text-copper500 mb-14"></div>
+    <p class="fade-up font-serif italic text-copper600 leading-snug" style="font-size:1.6rem">Um cuidado que se vê no lavatório e se sente dias depois.</p>
+  </div>
+</section>
+
+<section id="contato" class="grad-deep-soft py-28 md:py-36 px-6 text-center">
+  <div class="mono w-20 h-20 mx-auto mb-10 fade-up" style="--ring:#D8A477"><span class="font-serif font-medium text-copper300" style="font-size:32px;line-height:1">A</span></div>
+  <h2 class="fade-up font-serif font-light text-cream leading-tight max-w-2xl mx-auto" style="font-size:clamp(2rem,4.6vw,3rem)">Pronta para elevar o padrão do seu salão?</h2>
+  <p class="fade-up font-serif italic text-copper300 max-w-md mx-auto mt-6 mb-10" style="font-size:1.2rem">Fale com a equipe e monte o kit ideal para o seu atendimento.</p>
+  <a href="#topo" class="fade-up inline-block border border-copper500 text-copper300 text-xs tracked-1 px-10 py-4 rounded-full hover:bg-copper500 hover:text-deep950 transition">FALE CONOSCO</a>
+  <div class="fade-up w-16 h-px bg-copper600 mx-auto mt-16 mb-6"></div>
+  <p class="fade-up text-copper600 text-[10px] tracked-2">ARDELIS PROFESSIONAL · MARCA FICTÍCIA PARA DEMONSTRAÇÃO</p>
+</section>
+
+<footer class="bg-deep950 py-8 px-6 text-center"><p class="text-cream/40 text-[10px] tracked-1">ARDELIS PROFESSIONAL</p></footer>
+
+<script>
+  const els = document.querySelectorAll('.fade-up');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  els.forEach(el => io.observe(el));
+</script>
+</body>
+</html>

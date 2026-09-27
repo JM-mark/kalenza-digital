@@ -1,0 +1,23 @@
+# dependências e build
+node_modules/
+dist/
+.astro/
+
+# documentos internos (regras de marca, histórico e projetos reais antigos): ficam só no computador
+LEIA-ME-CONTINUACAO.md
+proposta.md
+_ferramentas/sites.js
+
+# material de trabalho das ferramentas
+_ferramentas/node_modules/
+_ferramentas/__pycache__/
+_ferramentas/pexels-site/
+_ferramentas/ulia-shots/
+_ferramentas/demo-full/
+_ferramentas/site-shots/
+_ferramentas/video-tmp/
+_ferramentas/lh-*.json
+
+# capturas de conferência (pesadas; geradas pelas ferramentas)
+capturas/
+_demos/capturas/

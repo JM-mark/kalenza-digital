@@ -1,0 +1,10 @@
+---
+// Título revelado palavra por palavra. O destaque <i> entra por último.
+import { split } from '../lib/i18n';
+interface Props { html: string; as?: 'h1' | 'h2' | 'h3' | 'p'; class?: string; base?: number; id?: string; load?: boolean }
+const { html, as: Tag = 'h2', class: cls = 'h2', base = 0, id, load = false } = Astro.props;
+const plain = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+---
+<Tag class:list={[cls, load ? 'split-load hero-load' : 'split']} data-split={load ? undefined : ''} style={base ? `--base:${base}ms` : undefined} id={id}>
+  <span class="sr">{plain}</span><span aria-hidden="true" set:html={split(html)} />
+</Tag>

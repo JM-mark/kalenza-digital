@@ -1,0 +1,112 @@
+---
+import Base from '../../../layouts/Base.astro';
+import VideoBand from '../../../components/VideoBand.astro';
+import Split from '../../../components/Split.astro';
+import Button from '../../../components/Button.astro';
+import OctNum from '../../../components/OctNum.astro';
+import { BUILD_LANGS, CASES, GALLERY, LIVE, wa, type CaseId, type Lang, IMG_V, BASE } from '../../../lib/config';
+import { t, pad } from '../../../lib/i18n';
+
+export function getStaticPaths() {
+  return BUILD_LANGS.flatMap((lang) => CASES.map((id) => ({ params: { lang, id } })));
+}
+const lang = Astro.params.lang as Lang;
+const id = Astro.params.id as CaseId;
+const c = t(lang);
+const s = c.site;
+const L = c.labels;
+const cs = c.cases[id] as (typeof c.cases)[CaseId] & { identity_title?: string; identity_text?: string };
+const i = CASES.indexOf(id);
+const next = CASES[(i + 1) % CASES.length];
+const nx = c.cases[next];
+const shots = GALLERY[id];
+const wide = shots.filter((g) => !g.print);
+const prints = shots.filter((g) => g.print);
+const title = `${cs.title} · ${cs.kind} · Kalenza Digital`;
+const blocks = [
+  [L.context, cs.context],
+  [L.did, cs.did],
+  [L.result, cs.design],
+];
+---
+<Base lang={lang} title={title} description={`${cs.context} ${cs.did}`} path={`projetos/${id}/`}>
+  <VideoBand name="trabalhos" hero labelledby="p-title" class="vband--project">
+    <div class="band pcover">
+      <p class="eyebrow load-rise" style="--d:0ms">{L.case} <span class="ltr">{pad(i + 1)}</span></p>
+      <Split html={cs.title} as="h1" class="display" id="p-title" load />
+      <p class="lead load-rise" style="--d:220ms">{cs.kind}</p>
+    </div>
+    <div class="pcover__shot wrap" aria-hidden="true">
+      <div class="frame" data-parallax>
+        <div class="frame__bar"><i></i><i></i><i></i></div>
+        <img src={`${BASE}/img/projetos/${id}-hero-1600.webp?v=${IMG_V}`} srcset={`${BASE}/img/projetos/${id}-hero-800.webp?v=${IMG_V} 800w, ${BASE}/img/projetos/${id}-hero-1600.webp?v=${IMG_V} 1600w`}
+          sizes="(min-width: 1100px) 60vw, 92vw" width="1600" height="1000" alt="" fetchpriority="high" />
+      </div>
+    </div>
+  </VideoBand>
+
+  <section class="on-light section proj" data-tone="light" aria-labelledby="p-title">
+    <div class="wrap grid">
+      <aside class="proj__fact" data-reveal>
+        <dl>
+          <div><dt class="eyebrow">{s.work.type}</dt><dd>{cs.kind}</dd></div>
+          <div><dt class="eyebrow">{L.deliverables}</dt><dd><ul class="chips">{cs.deliverables.map((d) => <li>{d}</li>)}</ul></dd></div>
+        </dl>
+        {LIVE[id] && <Button href={LIVE[id]!} variant="ghost" external>{s.work.live}</Button>}
+        <a class="ulink proj__back" href={`${BASE}/${lang}/#projetos`}><span class="arrow arrow--back" aria-hidden="true"></span> {s.work.back}</a>
+      </aside>
+      <div class="proj__text">
+        {blocks.map(([h, p], k) => (
+          <article class="proj__blk" data-reveal data-in>
+            <OctNum n={pad(k + 1)} delay={200} />
+            <div><h2 class="h3">{h}</h2><p class="lead">{p}</p></div>
+          </article>
+        ))}
+        {cs.identity_title && (
+          <article class="proj__blk" data-reveal data-in>
+            <OctNum n={pad(4)} delay={200} />
+            <div><h2 class="h3">{L.identity}</h2><p class="lead"><Fragment set:html={cs.identity_title} /> {cs.identity_text}</p></div>
+          </article>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="section proj-gal" data-tone="light" aria-label={s.work.shots}>
+    <div class="wrap">
+      <p class="eyebrow on-light-ink" data-reveal>{s.work.shots}</p>
+      <div class="gal">
+        {wide.map((g) => (
+          <figure class="frame aperture">
+            <div class="frame__bar"><i></i><i></i><i></i></div>
+            <img src={`${BASE}/img/projetos/${id}-${g.img}-${g.w}.webp?v=${IMG_V}`} width={g.w} height={g.h} alt="" loading="lazy" decoding="async" />
+          </figure>
+        ))}
+        <div class="gal__row">
+          <figure class="phone" data-reveal>
+            <img src={`${BASE}/img/projetos/${id}-m-480.webp?v=${IMG_V}`} width="480" height="1039" alt="" loading="lazy" decoding="async" />
+            <figcaption class="eyebrow on-light-ink">{s.work.mobile}</figcaption>
+          </figure>
+          {prints.map((g, k) => (
+            <figure class="print" data-reveal style={`--d:${k * 120}ms`}>
+              <img src={`${BASE}/img/projetos/${id}-${g.img}-${g.w}.webp?v=${IMG_V}`} width={g.w} height={g.h} alt="" loading="lazy" decoding="async" />
+            </figure>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark section pnext" data-tone="dark" aria-label={s.work.next}>
+    <div class="wrap pnext__in">
+      <div>
+        <p class="eyebrow" data-reveal>{s.work.next}</p>
+        <a class="pnext__link" href={`${BASE}/${lang}/projetos/${next}/`}>
+          <span class="h2">{nx.title}</span>
+          <span class="muted">{nx.kind}</span>
+        </a>
+      </div>
+      <Button href={wa(c.wa_text)} variant="primary" external>{s.work.all}</Button>
+    </div>
+  </section>
+</Base>

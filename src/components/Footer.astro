@@ -1,0 +1,29 @@
+---
+import sig from './signature-line.svg?raw';
+import { SITE, wa, type Lang, BASE } from '../lib/config';
+import { t } from '../lib/i18n';
+const { lang } = Astro.props as { lang: Lang };
+const c = t(lang); const s = c.site;
+const home = `${BASE}/${lang}/`;
+const links = [['sobre', s.nav.sobre], ['servicos', s.nav.servicos], ['projetos', s.nav.trabalhos], ['processo', s.nav.processo], ['contato', s.nav.contato]];
+const year = new Date().getFullYear();
+---
+<footer class="ftr dark" data-tone="dark">
+  <div class="ftr__pat" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="ftr__sig">
+      <a href={home} aria-label="Kalenza Digital"><Fragment set:html={sig} /></a>
+      {lang === 'ar' && <span class="arsig">كالينزا ديجيتال</span>}
+    </div>
+    <div class="ftr__cols">
+      <nav aria-label={s.nav.menu}><ul>{links.map(([id, label]) => <li><a class="ulink" href={`${home}#${id}`}>{label}</a></li>)}</ul></nav>
+      <ul>
+        <li><a class="ulink" href={wa(c.wa_text)} target="_blank" rel="noopener">WhatsApp</a></li>
+        {SITE.email && <li><a class="ulink" href={`mailto:${SITE.email}`}>{SITE.email}</a></li>}
+        {SITE.instagram && <li><a class="ulink" href={`https://instagram.com/${SITE.instagram}`} target="_blank" rel="noopener">@{SITE.instagram}</a></li>}
+      </ul>
+      <a class="ftr__top ulink" href="#top">{s.footer.top}</a>
+    </div>
+    <p class="ftr__legal"><span class="ltr">© {year} Kalenza Digital.</span> {s.footer.rights}</p>
+  </div>
+</footer>

@@ -1,0 +1,15 @@
+---
+// Botão chanfrado. variant: primary (champanhe) | ghost (contorno). shine: reflexo no hover.
+interface Props { href: string; variant?: 'primary' | 'ghost'; arrow?: boolean; shine?: boolean; external?: boolean; magnetic?: boolean; class?: string }
+const { href, variant = 'primary', arrow = true, shine = false, external = false, magnetic = true, class: cls = '' } = Astro.props;
+---
+<a
+  class:list={['btn', `btn--${variant}`, { 'btn--shine': shine }, cls]}
+  href={href}
+  data-magnetic={magnetic ? '' : undefined}
+  {...(external ? { target: '_blank', rel: 'noopener' } : {})}
+>
+  {shine && <span class="shine" aria-hidden="true"></span>}
+  <span><slot /></span>
+  {arrow && <span class="arrow" aria-hidden="true"></span>}
+</a>

@@ -1,0 +1,210 @@
+{
+  "lang": "en",
+  "dir": "ltr",
+  "wa_text": "Hello! I saw the Kalenza Digital portfolio and would like to discuss a project.",
+  "footer": "Portfolio 2026",
+  "cover": {
+    "eyebrow": "Portfolio 2026",
+    "title": "Brands designed <i>to be chosen.</i>",
+    "fronts": [
+      "Websites",
+      "Brand identity",
+      "Design",
+      "Marketing strategy"
+    ]
+  },
+  "about": {
+    "eyebrow": "About us",
+    "title": "We build brands that show their value <i>at first glance.</i>",
+    "cols": [
+      {
+        "h": "Who we are",
+        "p": "A studio for websites, brand identity, design and marketing. We pair aesthetics with strategy so every brand is perceived for what it is truly worth."
+      },
+      {
+        "h": "How we work",
+        "p": "We start with the business, not the screen. Every visual decision serves a clear goal: credibility, clarity or conversion."
+      },
+      {
+        "h": "Three languages",
+        "p": "We work in English, Portuguese and Arabic, including bilingual sites with true right-to-left layouts. A real advantage for brands selling into the Middle East."
+      }
+    ]
+  },
+  "services": {
+    "eyebrow": "Services",
+    "title": "Four disciplines, <i>one brand.</i>",
+    "items": [
+      {
+        "h": "Websites",
+        "p": "Corporate sites, landing pages, online catalogues and e-commerce. Fast, refined and built to turn visits into conversations.",
+        "list": [
+          "Corporate",
+          "Landing page",
+          "Online catalogue",
+          "E-commerce"
+        ],
+        "note": "Also available as bilingual AR · EN sites with a right-to-left layout."
+      },
+      {
+        "h": "Brand identity",
+        "p": "Logo, colour palette, typography and brand guidelines. A coherent identity that raises perceived value at every touchpoint.",
+        "list": [
+          "Logo & monogram",
+          "Palette & typography",
+          "Brand guidelines"
+        ]
+      },
+      {
+        "h": "Design",
+        "p": "Social media, catalogues, sales decks, price lists and print. Materials that sell to the same standard as your website.",
+        "list": [
+          "Social media",
+          "Catalogues",
+          "Sales decks",
+          "Price lists",
+          "Print"
+        ]
+      },
+      {
+        "h": "Marketing strategy",
+        "p": "Planning, positioning, social media management and campaigns. Clear direction for steady, consistent growth.",
+        "list": [
+          "Strategic planning",
+          "Positioning",
+          "Social media management",
+          "Campaigns"
+        ]
+      }
+    ]
+  },
+  "index": {
+    "eyebrow": "Selected projects",
+    "title": "Projects that show <i>how we think.</i>"
+  },
+  "labels": {
+    "case": "Project",
+    "concept": "Concept project",
+    "context": "The challenge",
+    "did": "What we did",
+    "deliverables": "Deliverables",
+    "result": "Design decisions",
+    "identity": "Brand identity",
+    "gallery": "In detail",
+    "languages": {
+      "pt": "Portuguese",
+      "en": "English",
+      "es": "Spanish",
+      "ar": "Arabic"
+    }
+  },
+  "cases": {
+    "marvessa": {
+      "title": "Marketing agency",
+      "kind": "Multilingual corporate website",
+      "sector": "Studio project · fictional brand Studio Marvessa",
+      "context": "How do you present an agency that works with brands in several countries, equally strong in every language?",
+      "did": "We designed an editorial site with a capsule header, headlines that appear word by word and a background that follows the reader.",
+      "deliverables": [
+        "Corporate website",
+        "PT · EN · ES versions",
+        "Mobile version"
+      ],
+      "design": "A condensed serif, cobalt blue on ink and light passages that set the reading rhythm."
+    },
+    "ambrevel": {
+      "title": "Luxury perfumery",
+      "kind": "Brand identity · Website · Catalogue",
+      "sector": "Studio project · fictional brand Maison Ambrevel",
+      "context": "How do you turn the richness of Oriental perfumery into a contemporary brand that is easy to present?",
+      "did": "We created the brand, a website with collections and a new-release showcase, and a catalogue in the same language.",
+      "deliverables": [
+        "Brand identity",
+        "Corporate website",
+        "Catalogue"
+      ],
+      "identity_title": "A brand with <i>warmth and refinement.</i>",
+      "identity_text": "Monogram, signature and palette extend to the website, the catalogue and the packaging.",
+      "design": "Deep burgundy, rosy bronze and a high-contrast serif; dark photography keeps the bottles in the foreground."
+    },
+    "ondessa": {
+      "title": "Aesthetics clinic",
+      "kind": "Website · Art direction",
+      "sector": "Studio project · fictional brand Clínica Ondessa",
+      "context": "How do you convey calm and care from the very first click and lead to a booking without friction?",
+      "did": "We created the Sage & Sand art direction and a website with treatments, the space and booking in a few taps.",
+      "deliverables": [
+        "Art direction",
+        "Website",
+        "Mobile version"
+      ],
+      "design": "Sage green, sand and a soft serif; cards reveal a photo of each treatment on hover."
+    },
+    "ardelis": {
+      "title": "Professional hair care",
+      "kind": "Corporate website · Sales deck",
+      "sector": "Studio project · fictional brand Ardelis Professional",
+      "context": "How do you give a professional salon line an image that matches the technical care it offers?",
+      "did": "We created a deep-green and copper visual system and applied it to the website and the sales deck.",
+      "deliverables": [
+        "Corporate website",
+        "Sales deck",
+        "Price list"
+      ],
+      "design": "A circular monogram, a classic serif and product photography in natural light, from website to sales material."
+    }
+  },
+  "process": {
+    "eyebrow": "Process",
+    "title": "From diagnosis <i>to growth.</i>",
+    "lead": "A clear path, with you involved at every stage.",
+    "steps": [
+      {
+        "h": "Discovery",
+        "p": "We learn the business, the audience and the brand's goals."
+      },
+      {
+        "h": "Strategy",
+        "p": "We define positioning, messaging and the channels that matter."
+      },
+      {
+        "h": "Creation",
+        "p": "We design identity, website and materials in one visual language."
+      },
+      {
+        "h": "Development",
+        "p": "We launch fast, responsive sites that are easy to manage."
+      },
+      {
+        "h": "Management",
+        "p": "We run social media and campaigns so the brand keeps growing."
+      }
+    ]
+  },
+  "why": {
+    "eyebrow": "Why us",
+    "title": "Why <i>Kalenza Digital.</i>",
+    "points": [
+      {
+        "h": "Aesthetics with strategy",
+        "p": "Every visual decision has a business purpose: to be remembered, to earn trust, to sell."
+      },
+      {
+        "h": "Everything in one place",
+        "p": "Website, identity, design and marketing speaking the same language, with no noise between suppliers."
+      },
+      {
+        "h": "An international standard",
+        "p": "English, Portuguese and Arabic with the same level of care, including right-to-left websites."
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Your brand deserves<br><i>to be the first choice.</i>",
+    "p": "Tell us about your project. We reply on WhatsApp within 24 hours.",
+    "button": "Chat on WhatsApp",
+    "qr": "Scan to open WhatsApp",
+    "langs": "We work in English, Portuguese and Arabic."
+  }
+}

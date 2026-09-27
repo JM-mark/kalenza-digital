@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "title": "Kalenza Digital · Sites, identidade visual, design e estratégia de marketing",
+    "description": "Agência de sites, identidade visual, design e estratégia de marketing. Unimos estética e estratégia para que cada marca seja percebida pelo que realmente vale."
+  },
+  "skip": "Pular para o conteúdo",
+  "nav": {
+    "sobre": "Sobre",
+    "servicos": "Serviços",
+    "trabalhos": "Projetos",
+    "processo": "Processo",
+    "contato": "Contato",
+    "cta": "Conversar",
+    "menu": "Menu",
+    "close": "Fechar",
+    "lang": "Idioma"
+  },
+  "hero": {
+    "eyebrow": "Kalenza Digital",
+    "title": "Marcas desenhadas <i>para serem escolhidas.</i>",
+    "lead": "Sites, identidade visual, design e estratégia de marketing para marcas que querem ser percebidas pelo que realmente valem.",
+    "primary": "Ver projetos",
+    "secondary": "Conversar no WhatsApp",
+    "scroll": "Role"
+  },
+  "work": {
+    "cta": "Ver projeto",
+    "all": "Falar sobre o seu projeto",
+    "sector": "Setor",
+    "type": "Tipo",
+    "next": "Próximo projeto",
+    "back": "Todos os projetos",
+    "shots": "Capturas",
+    "mobile": "Versão mobile",
+    "live": "Ver site"
+  },
+  "contact": {
+    "whatsapp": "WhatsApp",
+    "wa_title": "Atendimento pelo WhatsApp",
+    "wa_text": "Fale direto conosco. Respondemos em até 24 horas, em português, inglês ou árabe.",
+    "wa_button": "Iniciar conversa",
+    "email": "E-mail",
+    "instagram": "Instagram",
+    "soon": "em breve",
+    "form_title": "Ou deixe uma mensagem",
+    "name": "Nome",
+    "mail": "E-mail",
+    "message": "Mensagem",
+    "send": "Enviar mensagem",
+    "note": "Respondemos em até 24 horas."
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados.",
+    "top": "Voltar ao topo"
+  },
+  "wa_float": "Conversar no WhatsApp",
+  "thanks": {
+    "title": "Mensagem <i>recebida.</i>",
+    "text": "Obrigado pelo contato. Respondemos em até 24 horas.",
+    "back": "Voltar ao início"
+  },
+  "wa_text": "Olá! Vim pelo site da Kalenza Digital e quero conversar sobre um projeto.",
+  "services_short": [
+    "Sites institucionais, landing pages, catálogos e e-commerce rápidos e elegantes.",
+    "Logo, paleta, tipografia e guia de marca para uma identidade coerente em cada contato.",
+    "Posts, catálogos, apresentações e impressos no mesmo padrão do site.",
+    "Planejamento, posicionamento, redes sociais e campanhas com direção clara."
+  ],
+  "services_open": "Ver detalhes"
+}

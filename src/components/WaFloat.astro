@@ -1,0 +1,9 @@
+---
+import { wa } from '../lib/config';
+import { WA_PATH } from '../lib/icons';
+const { label, text } = Astro.props as { label: string; text: string };
+---
+<a class="wa-float" href={wa(text)} target="_blank" rel="noopener" aria-label={label} data-magnetic>
+  <span class="wa-float__bubble" aria-hidden="true"><i></i><i></i><i></i></span>
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d={WA_PATH}/></svg>
+</a>

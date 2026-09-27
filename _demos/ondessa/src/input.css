@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+  body { @apply bg-ivory font-sans text-cocoa-900 antialiased; }
+  h1, h2, h3, .font-display { font-family: 'Gloock', Georgia, serif; font-weight: 400; }
+  ::selection { background: #C2A574; color: #121C19; }
+}
+
+@layer components {
+  /* ---------- Botões (mesma linguagem em toda a página) ---------- */
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold tracking-wide transition duration-300; }
+  .btn-gold { @apply bg-gold-500 text-cocoa-950 shadow-lg shadow-gold-600/20 hover:-translate-y-0.5 hover:bg-gold-400 hover:shadow-xl hover:shadow-gold-600/30; }
+  .btn-ghost-light { @apply border border-ivory/40 text-ivory hover:border-gold-400 hover:text-gold-300; }
+  .btn-ghost-dark { @apply border border-cocoa-900/20 text-cocoa-900 hover:border-rose-500 hover:text-rose-600; }
+  .eyebrow { @apply text-[11px] font-bold uppercase tracking-widest2 text-rose-600; }
+
+  /* ---------- Header: transparente sobre o hero -> sólido e mais baixo ao rolar ---------- */
+  #site-header { transition: background-color .35s ease, box-shadow .35s ease, backdrop-filter .35s ease; }
+  #site-header > div { transition: padding .35s ease; }
+  #site-header .brand, #site-header .nav-link { color: #F8F6F1; transition: color .3s ease; }
+  #site-header .nav-link { opacity: .85; }
+  #site-header .nav-link:hover { color: #D8C49E; opacity: 1; }
+  #site-header.scrolled { background: rgba(248, 246, 241, .92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 8px 30px -12px rgba(27, 42, 37, .25); }
+  #site-header.scrolled > div { padding-top: .5rem; padding-bottom: .5rem; }
+  #site-header.scrolled .brand, #site-header.scrolled .nav-link { color: #1B2A25; }
+  #site-header.scrolled .nav-link:hover { color: #4B6B58; }
+
+  .logo-mark {
+    width: 44px; height: 44px; border-radius: 9999px; flex: none; display: grid; place-items: center;
+    background: #1B2A25; color: #D8C49E; font-family: 'Gloock', Georgia, serif; font-size: 22px; line-height: 1;
+    box-shadow: 0 0 0 2px rgba(248, 246, 241, .9);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero-bg { animation: kenburns 2.4s cubic-bezier(.2, .7, .2, 1) both; transform-origin: 70% 60%; }
+  .star::before { content: "★"; }
+
+  /* ---------- Cards de tratamento ---------- */
+  .svc-card { @apply relative isolate flex flex-col overflow-hidden rounded-[28px] border border-rose-100 bg-white p-7 transition duration-500; }
+  .svc-card .svc-photo { @apply absolute inset-0 -z-10 opacity-0 transition duration-700; }
+  .svc-card .svc-photo img { @apply h-full w-full scale-110 object-cover transition duration-1000; }
+  .svc-card .svc-shade { @apply absolute inset-0 -z-10 bg-gradient-to-t from-cocoa-950/90 via-cocoa-900/70 to-cocoa-900/40 opacity-0 transition duration-700; }
+  .svc-card .svc-icon { @apply flex h-14 w-14 items-center justify-center rounded-2xl bg-rose-100 text-rose-600 transition duration-500; }
+  .svc-card .svc-title { @apply text-cocoa-900 transition duration-500; }
+  .svc-card .svc-text { @apply text-cocoa-900/65 transition duration-500; }
+  .svc-card .svc-num { @apply text-rose-300 transition duration-500; }
+  .svc-card .svc-cta { @apply text-rose-600 transition duration-500; }
+  .svc-card .svc-arrow { transition: transform .4s ease; }
+  @media (hover: hover) {
+    .svc-card:hover { @apply -translate-y-1.5 border-transparent shadow-2xl shadow-cocoa-900/20; }
+    .svc-card:hover .svc-photo { @apply opacity-100; }
+    .svc-card:hover .svc-photo img { @apply scale-100; }
+    .svc-card:hover .svc-shade { @apply opacity-100; }
+    .svc-card:hover .svc-icon { @apply -rotate-6 bg-gold-500 text-cocoa-950; }
+    .svc-card:hover .svc-title { @apply text-ivory; }
+    .svc-card:hover .svc-text { @apply text-ivory/80; }
+    .svc-card:hover .svc-num { @apply text-gold-400; }
+    .svc-card:hover .svc-cta { @apply text-gold-300; }
+    .svc-card:hover .svc-arrow { transform: translateX(6px); }
+  }
+
+  /* ---------- Faixa de tratamentos ---------- */
+  .marquee-track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
+
+  /* ---------- Depoimentos ---------- */
+  .testi-slide { grid-area: 1 / 1; opacity: 0; transform: translateY(14px); pointer-events: none; transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1); }
+  .testi-slide.is-active { opacity: 1; transform: none; pointer-events: auto; }
+  .testi-bar { position: relative; height: 3px; flex: 1; overflow: hidden; border-radius: 9999px; background: rgba(248, 246, 241, .18); cursor: pointer; }
+  .testi-bar::after { content: ""; position: absolute; inset: 0; transform-origin: left; transform: scaleX(0); background: #D8C49E; }
+  .testi-bar.is-done::after { transform: scaleX(1); }
+  .testi-bar.is-active::after { animation: fillbar 7s linear forwards; }
+  @media (hover: hover) { #testi:hover .testi-bar.is-active::after { animation-play-state: paused; } }
+
+  /* ---------- WhatsApp flutuante ---------- */
+  .whatsapp-pulse { animation: pulse-wa 2.8s infinite; }
+}
+
+@layer utilities {
+  /* Scroll reveal: só esconde se o JS estiver ativo (classe .js no <html>) */
+  .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s ease, transform .9s cubic-bezier(.2, .7, .2, 1); transition-delay: var(--d, 0ms); }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  /* Hero: entrada em cascata linha por linha (máscara + slide-up) */
+  .js .line { display: block; overflow: hidden; padding-bottom: .12em; margin-bottom: -.12em; }
+  .js .line > span { display: block; animation: rise-line 1s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--i, 0) * 130ms + 250ms); }
+  .js .rise { animation: rise-fade .9s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--i, 0) * 130ms + 250ms); }
+}
+
+@keyframes rise-line { from { transform: translateY(105%); } to { transform: none; } }
+@keyframes rise-fade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+@keyframes kenburns { from { transform: scale(1.07); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes fillbar { to { transform: scaleX(1); } }
+@keyframes pulse-wa {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, .5); }
+  70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* Movimento reduzido: sem animações; tudo aparece direto e o carrossel não roda sozinho */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .js .line > span, .js .rise, .hero-bg { animation: none !important; }
+  .marquee-track { animation: none !important; flex-wrap: wrap; width: auto; justify-content: center; }
+  .whatsapp-pulse { animation: none !important; }
+  .testi-slide { transition: none !important; }
+  .testi-bar.is-active::after { animation: none !important; transform: scaleX(1); }
+  .svc-card, .svc-card * { transition: none !important; }
+  #site-header, #site-header > div { transition: none !important; }
+}

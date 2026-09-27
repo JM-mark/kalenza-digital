@@ -1,0 +1,7 @@
+---
+// Número de item em itálico champanhe (sem moldura).
+const { n, delay = 0 } = Astro.props as { n: string; delay?: number };
+---
+<span class="octnum" style={`--d:${delay}ms`} aria-hidden="true">
+  <span class="ltr">{n}</span>
+</span>

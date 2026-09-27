@@ -1,0 +1,223 @@
+---
+import Base from '../../layouts/Base.astro';
+import VideoBand from '../../components/VideoBand.astro';
+import HeroArt from '../../components/HeroArt.astro';
+import Split from '../../components/Split.astro';
+import Button from '../../components/Button.astro';
+import OctNum from '../../components/OctNum.astro';
+import { WA_PATH } from '../../lib/icons';
+import { BUILD_LANGS, CASES, FULL_H, SITE, wa, type Lang, IMG_V, BASE } from '../../lib/config';
+import { t, pad } from '../../lib/i18n';
+
+export function getStaticPaths() {
+  return BUILD_LANGS.map((lang) => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Lang;
+const c = t(lang);
+const s = c.site;
+const waHref = wa(c.wa_text);
+const SVC_IMG = ['svc-sites', 'svc-identidade', 'svc-design', 'svc-estrategia'];
+---
+<Base lang={lang} title={s.meta.title} description={s.meta.description}>
+
+  <!-- HERO (faixa escura 1 de 3) -->
+  <VideoBand name="hero" hero id="inicio" labelledby="hero-title">
+    <HeroArt slot="art" />
+    <div class="hero">
+      <p class="eyebrow load-rise" style="--d:0ms">{s.hero.eyebrow}</p>
+      <Split html={s.hero.title} as="h1" class="display hero__title" id="hero-title" load />
+      <div class="hero__foot">
+        <p class="lead muted load-rise" style="--d:220ms">{s.hero.lead}</p>
+        <div class="hero__ctas load-rise" style="--d:320ms">
+          <Button href={`${BASE}/${lang}/#projetos`} variant="primary">{s.hero.primary}</Button>
+          <Button href={waHref} variant="ghost" external arrow={false}>{s.hero.secondary}</Button>
+        </div>
+      </div>
+    </div>
+    <a class="hint" href="#sobre" aria-hidden="true" tabindex="-1"><i></i><span>{s.hero.scroll}</span></a>
+  </VideoBand>
+
+  <!-- SOBRE (claro, com imagem) -->
+  <section class="on-light section about" id="sobre" data-tone="light" aria-labelledby="sobre-title">
+    <div class="wrap about__grid">
+      <figure class="about__img aperture" style="margin:0">
+        <img src={`${BASE}/img/apoio/sobre-1000.webp`} srcset={`${BASE}/img/apoio/sobre-560.webp 560w, ${BASE}/img/apoio/sobre-1000.webp 1000w`}
+          sizes="(min-width: 1100px) 38vw, 92vw" width="1000" height="1250" alt="" loading="lazy" decoding="async" />
+      </figure>
+      <div>
+        <div class="shead">
+          <p class="eyebrow" data-reveal>{c.about.eyebrow}</p>
+          <Split html={c.about.title} id="sobre-title" />
+        </div>
+        <div class="about__list">
+          {c.about.cols.map((col, i) => (
+            <article class="about__item" data-reveal data-in style={`--d:${i * 60}ms`}>
+              <OctNum n={pad(i + 1)} delay={i * 60} />
+              <h3 class="h3">{col.h}</h3>
+              <p class="muted">{col.p}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS (grade 2×2; acordeão no celular) -->
+  <section class="section svc2 on-light" id="servicos" data-tone="light" aria-labelledby="servicos-title">
+    <div class="wrap">
+      <div class="shead">
+        <p class="eyebrow" data-reveal>{c.services.eyebrow}</p>
+        <Split html={c.services.title} id="servicos-title" />
+      </div>
+      <div class="svc2__grid">
+        {c.services.items.map((it, i) => (
+          <article class="sv" data-reveal data-in data-sv style={`--d:${(i % 2) * 80}ms`}>
+            <div class="sv__img" aria-hidden="true"><img src={`${BASE}/img/apoio/${SVC_IMG[i]}-720.webp`} width="720" height="540" alt="" loading="lazy" decoding="async" /></div>
+            <button class="sv__head" type="button" aria-expanded="false" aria-controls={`sv-${i}`}>
+              <OctNum n={pad(i + 1)} />
+              <h3 class="h3">{it.h}</h3>
+              <span class="sv__plus" aria-hidden="true"></span>
+            </button>
+            <div class="sv__body" id={`sv-${i}`}>
+              <div>
+                <p>{s.services_short[i]}</p>
+                <ul class="sv__tags">{it.list.map((x) => <li>{x}</li>)}</ul>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETOS (faixa escura 2 de 3) -->
+  <VideoBand name="trabalhos" id="projetos" labelledby="projetos-title">
+    <div class="band">
+      <p class="eyebrow" data-reveal>{c.index.eyebrow}</p>
+      <Split html={c.index.title} id="projetos-title" />
+    </div>
+  </VideoBand>
+  <section class="on-light work2" data-tone="light" aria-labelledby="projetos-title">
+    <div class="wrap">
+      <div class="work2__grid">
+      {CASES.map((key, i) => {
+        const cs = c.cases[key];
+        return (
+          <a class:list={['pj', { 'pj--feature': i === 0 }]} href={`${BASE}/${lang}/projetos/${key}/`} data-pj>
+            <div class="pj__stage aperture">
+              <div class="pj__browser">
+                <div class="pj__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+                <div class="pj__view">
+                  <img src={`${BASE}/img/projetos/${key}-full-720.webp?v=${IMG_V}`} width="720" height={FULL_H[key]} alt={`${cs.kind} · ${cs.title}`} loading="lazy" decoding="async" />
+                </div>
+              </div>
+              <div class="pj__phone" aria-hidden="true"><img src={`${BASE}/img/projetos/${key}-m-480.webp?v=${IMG_V}`} width="480" height="1039" alt="" loading="lazy" decoding="async" /></div>
+            </div>
+            <div class="pj__meta" data-reveal>
+              <div class="pj__top"><span class="pj__n ltr">{pad(i + 1)}</span></div>
+              <h3 class="h2">{cs.title}</h3>
+              <p class="pj__kind">{cs.kind}</p>
+              <span class="pj__cta">{s.work.cta}<span class="arrow" aria-hidden="true"></span></span>
+            </div>
+          </a>
+        );
+      })}
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESSO (escuro; título dentro da seção) -->
+  <section class="dark proc" id="processo" data-tone="dark" aria-labelledby="processo-title">
+    <div class="proc__stage">
+      <div class="proc__pat" aria-hidden="true"></div>
+      <div class="wrap proc__head">
+        <p class="eyebrow" data-reveal>{c.process.eyebrow}</p>
+        <Split html={c.process.title} id="processo-title" />
+      </div>
+      <ol class="proc__steps wrap">
+        {c.process.steps.map((st, i) => (
+          <li class="step">
+            <span class="step__num ltr" aria-hidden="true">{pad(i + 1)}</span>
+            <div class="step__text" data-reveal>
+              <p class="eyebrow">{pad(i + 1)} / {pad(c.process.steps.length)}</p>
+              <h3 class="h2">{st.h}</h3>
+              <p class="lead muted">{st.p}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <div class="rail wrap" aria-hidden="true">
+        <div class="rail__line"><span class="rail__fill"></span></div>
+        <ol class="rail__nodes">
+          {c.process.steps.map((st) => <li class="rail__node"><i></i><span>{st.h}</span></li>)}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR QUE (claro, faixa de imagem) -->
+  <section class="on-light section why2" id="por-que" data-tone="light" aria-labelledby="why-title">
+    <div class="wrap">
+      <div class="shead">
+        <p class="eyebrow" data-reveal>{c.why.eyebrow}</p>
+        <Split html={c.why.title} id="why-title" />
+      </div>
+      <div class="why2__img aperture" aria-hidden="true">
+        <img src={`${BASE}/img/apoio/porque-1600.webp`} srcset={`${BASE}/img/apoio/porque-800.webp 800w, ${BASE}/img/apoio/porque-1600.webp 1600w`} sizes="92vw"
+          width="1600" height="900" alt="" loading="lazy" decoding="async" data-parallax />
+      </div>
+      <div class="why2__grid">
+        {c.why.points.map((p, i) => (
+          <article class="why2__pt" data-reveal data-in style={`--d:${i * 60}ms`}>
+            <OctNum n={pad(i + 1)} delay={i * 60} />
+            <h3 class="h3">{p.h}</h3>
+            <p class="muted">{p.p}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO (faixa escura 3 de 3) -->
+  <VideoBand name="contato" id="contato" labelledby="contato-title" class="vband--contact">
+    <div class="band">
+      <p class="eyebrow" data-reveal>{c.contact.eyebrow}</p>
+      <Split html={c.contact.title} id="contato-title" />
+      <p class="lead muted band__lead" data-reveal>{c.contact.p}</p>
+      <div class="band__ctas" data-reveal>
+        <Button href={waHref} variant="primary" shine external>{c.contact.button}</Button>
+      </div>
+    </div>
+  </VideoBand>
+  <section class="dark section contact" data-tone="dark" aria-labelledby="contato-title">
+    <div class="wrap grid">
+      <ul class="contact__lines" data-reveal>
+        <li class="wa-card">
+          <svg class="wa-card__ico" viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d={WA_PATH} /></svg>
+          <h3 class="h3">{s.contact.wa_title}</h3>
+          <p class="muted">{s.contact.wa_text}</p>
+          <Button href={waHref} variant="ghost" external>{s.contact.wa_button}</Button>
+        </li>
+        {SITE.email && (
+          <li><span class="eyebrow">{s.contact.email}</span><a class="contact__big ulink" href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+        )}
+        {SITE.instagram && (
+          <li><span class="eyebrow">{s.contact.instagram}</span><a class="contact__big ulink ltr" href={`https://instagram.com/${SITE.instagram}`} target="_blank" rel="noopener">@{SITE.instagram}</a></li>
+        )}
+      </ul>
+      <form class="form" name="contato" method="POST" data-netlify="true" netlify-honeypot="empresa" action={`${BASE}/${lang}/obrigado/`} data-reveal>
+        <input type="hidden" name="form-name" value="contato" />
+        <input type="hidden" name="idioma" value={lang} />
+        <p class="sr"><label>Empresa <input name="empresa" tabindex="-1" autocomplete="off" /></label></p>
+        <h3 class="h3">{s.contact.form_title}</h3>
+        <label class="field"><span>{s.contact.name}</span><input name="nome" autocomplete="name" required /></label>
+        <label class="field"><span>{s.contact.mail}</span><input name="email" type="email" autocomplete="email" required /></label>
+        <label class="field"><span>{s.contact.message}</span><textarea name="mensagem" rows="3" required></textarea></label>
+        <div class="form__foot">
+          <button class="btn btn--ghost" type="submit" data-magnetic><span>{s.contact.send}</span><span class="arrow" aria-hidden="true"></span></button>
+          <p class="muted form__note">{s.contact.note}</p>
+        </div>
+      </form>
+    </div>
+  </section>
+</Base>
