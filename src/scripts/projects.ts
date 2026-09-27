@@ -17,4 +17,14 @@ export function initProjects() {
     set(card);
   });
   addEventListener('resize', () => cards.forEach(set), { passive: true });
+
+  // ?motion=on em telas de toque (sem hover): a página rola no mockup quando o card está na tela
+  if (document.documentElement.classList.contains('motion-on') && !matchMedia('(hover: hover) and (pointer: fine)').matches && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      const card = e.target as HTMLElement;
+      if (e.isIntersecting) set(card);
+      card.classList.toggle('is-playing', e.isIntersecting);
+    }), { threshold: 0.55 });
+    cards.forEach((c) => io.observe(c));
+  }
 }

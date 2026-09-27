@@ -52,6 +52,10 @@ html.intro { --intro: 320ms; }
   /* o giro contínuo começa depois do carregamento (o desenho dos anéis entra na hora): menos trabalho para a CPU do celular no início */
   .ha__r1, .ha__r2, .ha__r3, .ha__r4 { animation-delay: 3s; }
   .ha__r1 > path:first-child, .ha__r2 > path:first-child, .ha__r3 > path:first-child, .ha__r4 > path:first-child { will-change: stroke-dashoffset; }
+  /* ?motion=on: a peça inteira do desktop também aqui (K e giro desde o início), no espaço livre acima do título */
+  html.motion-on .ha { width: min(50vw, 300px); top: calc(var(--header-h) + 4px); inset-inline-end: var(--gutter); opacity: .95; }
+  html.motion-on .ha__k { animation: fade-in .9s var(--ease) calc(var(--intro, 0ms) + .8s) forwards; }
+  html.motion-on :is(.ha__r1, .ha__r2, .ha__r3, .ha__r4) { animation-delay: 0s; }
 }
 @media (min-width: 1100px) {
   .hero { max-width: 56%; }
@@ -136,6 +140,8 @@ html[dir='rtl'] .vband--hero .vband__scrim { background:
   .sv:hover .sv__img, .sv:focus-within .sv__img { opacity: 1; transform: none; }
   .sv:hover .sv__tags, .sv:focus-within .sv__tags { max-height: 120px; opacity: 1; transform: none; padding-top: 18px; }
 }
+/* ?motion=on no celular: o card aberto mostra a foto, como o hover do desktop */
+@media (max-width: 899px) { html.motion-on .sv[data-open] .sv__img { opacity: 1; transform: none; } }
 
 /* ---------- projetos: grade 2×2 de mockups grandes, com rolagem automática no hover ---------- */
 .work2 { background: var(--marfim); padding-block: clamp(40px, 5vw, 64px) var(--section); }
@@ -169,6 +175,10 @@ html[dir='rtl'] .pj__meta :is(.h2, .h3) { --from: right; }
 /* "Ver projeto" segue o texto dos botões: caixa normal, 15 px, peso 500, com seta */
 .pj__cta { display: inline-flex; align-items: center; gap: 12px; margin-top: 10px; font-size: var(--fs-btn); letter-spacing: .01em; color: var(--noite); font-weight: 500; }
 html[lang='ar'] .pj__cta { font-size: 1rem; letter-spacing: 0; }
+/* ?motion=on no toque: .is-playing faz o mesmo que o hover, quando o card está na tela (scripts/projects.ts) */
+.pj.is-playing .pj__view img { transform: translateY(var(--scroll, 0px)); }
+.pj.is-playing .pj__phone { transform: translateY(-10px); }
+.pj.is-playing .pj__meta :is(.h2, .h3)::after { transform: scaleX(1); }
 @media (hover: hover) and (pointer: fine) {
   .pj:hover .pj__view img { transform: translateY(var(--scroll, 0px)); }
   .pj:hover .pj__phone { transform: translateY(-10px); }
@@ -235,4 +245,15 @@ html[lang='ar'] .pj__cta { font-size: 1rem; letter-spacing: 0; }
   .proc:not(.is-pinned) .step__text .h2 { font-size: calc(var(--fs-h3) * var(--display-scale)); line-height: var(--lh-h3); letter-spacing: var(--ls-md); }
   .proc__stage { padding-block: var(--section); }
   .proc__head { margin-bottom: 28px; }
+}
+
+/* ?motion=on no celular/tablet: capítulos fixados do Processo (os mesmos do desktop), em uma coluna */
+@media (max-width: 1099px) {
+  .proc.is-pinned .proc__stage { height: 100svh; }
+  .proc.is-pinned .step { grid-template-columns: minmax(0, 1fr); padding: 0 var(--gutter) 110px; }
+  .proc.is-pinned .step__num, .proc.is-pinned .step__text { grid-column: 1 / -1; }
+  /* o trilho termina antes do botão flutuante do WhatsApp */
+  .proc.is-pinned .rail { bottom: 40px; padding-inline-end: calc(var(--gutter) + 72px); }
+  .proc.is-pinned .rail__line { inset-inline-end: calc(var(--gutter) + 72px); }
+  .proc.is-pinned .rail__node span { display: none; }
 }

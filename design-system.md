@@ -208,6 +208,12 @@ Ferramentas em `_ferramentas/`, todas contra `node _ferramentas/serve_dist.js 43
 - **Nada fica em branco:** `scripts/reveal.ts` usa o IntersectionObserver e, além dele, uma varredura (rolagem, `scrollend`, clique em âncora, `hashchange` e 1,2 s após carregar) que revela tudo que já está na altura da tela. No Processo fixado, os textos passam a ser controlados só pelo GSAP (entram visíveis). Teste: `node _ferramentas/ancoras.js [pt|en|ar]` clica em cada link do menu e dá saltos de rolagem, no desktop e no celular.
 - **Efeitos no celular:** a peça do hero tem os 4 anéis que se desenham e giram também abaixo de 1100 px (sem o K, que ficaria atrás do título); o giro contínuo começa 3 s depois, para aliviar a CPU no carregamento.
 - **`?motion=on`**: força os efeitos mesmo com "reduzir movimento" ativo no aparelho (intro, anéis, vídeo, entradas, Processo fixado). A escolha fica salva no aparelho (`localStorage kz-motion`); `?motion=off` volta ao padrão. Implementado com `html.motion-on`: todas as regras `prefers-reduced-motion` do CSS são escopadas com `html:not(.motion-on)` e `reduced()` em `scripts/motion.ts` respeita a classe.
+- **`?motion=on` no celular e tablet** (abaixo de 1100 px) também liga tudo o que antes era exclusivo do desktop:
+  - peça do hero completa, com o K e os anéis girando desde o início, acima do título (`min(50vw, 300px)`); sem mouse, as camadas flutuam sozinhas nas mesmas profundidades do parallax (`drift` em `hero-art.ts`);
+  - Processo com os capítulos fixados (GSAP) em uma coluna, trilho sem rótulos e terminando antes do botão do WhatsApp (`process.ts`, `QUERY`);
+  - Projetos: a página rola dentro do mockup quando o card está na tela (`.pj.is-playing`, em `projects.ts`), no lugar do hover;
+  - Serviços: o card aberto mostra a foto de fundo, no lugar do hover.
+  Sem o parâmetro, o celular continua com a versão leve (peça sem o K, carrossel no Processo).
 
 ## 11. Backend e segurança
 O site é estático (Astro → `dist/`) servido por um **Cloudflare Worker** (`worker/`, configurado em `wrangler.jsonc`). O Worker só entra em duas rotas; todo o resto é arquivo estático.

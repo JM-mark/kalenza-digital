@@ -4,10 +4,13 @@ import { reduced } from './motion';
 // capítulos das clínicas): a etapa que sai sobe e some, a que entra desliza de baixo, e o trilho
 // de octógonos acompanha. O GSAP só é baixado no desktop, quando a seção se aproxima.
 // No celular e com movimento reduzido fica a lista vertical (só CSS).
+// Com ?motion=on (html.motion-on) os capítulos fixados também valem no celular e no tablet.
+const QUERY = () => (document.documentElement.classList.contains('motion-on') ? '(min-height: 540px)' : '(min-width: 1100px) and (min-height: 640px)');
+
 export function initProcess() {
   const sec = document.querySelector<HTMLElement>('.proc');
   if (!sec || reduced() || !('IntersectionObserver' in window)) return;
-  const desk = matchMedia('(min-width: 1100px) and (min-height: 640px)');
+  const desk = matchMedia(QUERY());
   let started = false;
   const start = () => {
     if (started || !desk.matches) return;
@@ -17,6 +20,7 @@ export function initProcess() {
       io.disconnect();
       const [{ gsap }, { ScrollTrigger }] = await Promise.all([import('gsap'), import('gsap/ScrollTrigger')]);
       gsap.registerPlugin(ScrollTrigger);
+      ScrollTrigger.config({ ignoreMobileResize: true }); // a barra de endereço do celular não recalcula o pin
       pin(sec, gsap, ScrollTrigger);
     }, { rootMargin: '900px 0px' });
     io.observe(sec);
@@ -27,7 +31,7 @@ export function initProcess() {
 
 function pin(sec: HTMLElement, gsap: typeof import('gsap').gsap, ST: typeof import('gsap/ScrollTrigger').ScrollTrigger) {
   const mm = gsap.matchMedia();
-  mm.add('(min-width: 1100px) and (min-height: 640px)', () => {
+  mm.add(QUERY(), () => {
     const steps = gsap.utils.toArray<HTMLElement>('.step', sec);
     const nums = steps.map((s) => s.querySelector('.step__num'));
     const txts = steps.map((s) => s.querySelector('.step__text'));
