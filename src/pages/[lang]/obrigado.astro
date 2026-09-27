@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import VideoBand from '../../components/VideoBand.astro';
 import Split from '../../components/Split.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
 import Button from '../../components/Button.astro';
 import { BUILD_LANGS, type Lang, BASE } from '../../lib/config';
 import { t } from '../../lib/i18n';
@@ -12,8 +13,8 @@ const c = t(lang); const s = c.site;
 <Base lang={lang} title={`${s.thanks.title.replace(/<[^>]+>/g, '')} · Kalenza Digital`} description={s.thanks.text} path="obrigado/">
   <VideoBand name="contato" hero labelledby="ty-title">
     <div class="band">
-      <p class="eyebrow" data-reveal>{c.contact.eyebrow}</p>
-      <Split html={s.thanks.title} as="h1" class="display" id="ty-title" base={200} />
+      <Eyebrow reveal>{c.contact.eyebrow}</Eyebrow>
+      <Split html={s.thanks.title} as="h1" class="h1" id="ty-title" base={200} />
       <p class="lead muted" data-reveal style="--d:700ms">{s.thanks.text}</p>
       <div class="band__ctas" data-reveal style="--d:850ms"><Button href={`${BASE}/${lang}/`} variant="ghost">{s.thanks.back}</Button></div>
     </div>

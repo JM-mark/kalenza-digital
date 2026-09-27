@@ -2,6 +2,7 @@
 import Base from '../../../layouts/Base.astro';
 import VideoBand from '../../../components/VideoBand.astro';
 import Split from '../../../components/Split.astro';
+import Eyebrow from '../../../components/Eyebrow.astro';
 import Button from '../../../components/Button.astro';
 import OctNum from '../../../components/OctNum.astro';
 import { BUILD_LANGS, CASES, GALLERY, LIVE, wa, type CaseId, type Lang, IMG_V, BASE } from '../../../lib/config';
@@ -32,8 +33,8 @@ const blocks = [
 <Base lang={lang} title={title} description={`${cs.context} ${cs.did}`} path={`projetos/${id}/`}>
   <VideoBand name="trabalhos" hero labelledby="p-title" class="vband--project">
     <div class="band pcover">
-      <p class="eyebrow load-rise" style="--d:0ms">{L.case} <span class="ltr">{pad(i + 1)}</span></p>
-      <Split html={cs.title} as="h1" class="display" id="p-title" load />
+      <Eyebrow n={pad(i + 1)} class="load-rise" style="--d:0ms">{L.case}</Eyebrow>
+      <Split html={cs.title} as="h1" class="h1" id="p-title" load />
       <p class="lead load-rise" style="--d:220ms">{cs.kind}</p>
     </div>
     <div class="pcover__shot wrap" aria-hidden="true">
@@ -49,8 +50,8 @@ const blocks = [
     <div class="wrap grid">
       <aside class="proj__fact" data-reveal>
         <dl>
-          <div><dt class="eyebrow">{s.work.type}</dt><dd>{cs.kind}</dd></div>
-          <div><dt class="eyebrow">{L.deliverables}</dt><dd><ul class="chips">{cs.deliverables.map((d) => <li>{d}</li>)}</ul></dd></div>
+          <div><dt class="label">{s.work.type}</dt><dd>{cs.kind}</dd></div>
+          <div><dt class="label">{L.deliverables}</dt><dd><ul class="chips">{cs.deliverables.map((d) => <li>{d}</li>)}</ul></dd></div>
         </dl>
         {LIVE[id] && <Button href={LIVE[id]!} variant="ghost" external>{s.work.live}</Button>}
         <a class="ulink proj__back" href={`${BASE}/${lang}/#projetos`}><span class="arrow arrow--back" aria-hidden="true"></span> {s.work.back}</a>
@@ -74,7 +75,7 @@ const blocks = [
 
   <section class="section proj-gal" data-tone="light" aria-label={s.work.shots}>
     <div class="wrap">
-      <p class="eyebrow on-light-ink" data-reveal>{s.work.shots}</p>
+      <Eyebrow reveal>{s.work.shots}</Eyebrow>
       <div class="gal">
         {wide.map((g) => (
           <figure class="frame aperture">
@@ -85,7 +86,7 @@ const blocks = [
         <div class="gal__row">
           <figure class="phone" data-reveal>
             <img src={`${BASE}/img/projetos/${id}-m-480.webp?v=${IMG_V}`} width="480" height="1039" alt="" loading="lazy" decoding="async" />
-            <figcaption class="eyebrow on-light-ink">{s.work.mobile}</figcaption>
+            <figcaption class="label">{s.work.mobile}</figcaption>
           </figure>
           {prints.map((g, k) => (
             <figure class="print" data-reveal style={`--d:${k * 120}ms`}>
@@ -100,7 +101,7 @@ const blocks = [
   <section class="dark section pnext" data-tone="dark" aria-label={s.work.next}>
     <div class="wrap pnext__in">
       <div>
-        <p class="eyebrow" data-reveal>{s.work.next}</p>
+        <Eyebrow reveal>{s.work.next}</Eyebrow>
         <a class="pnext__link" href={`${BASE}/${lang}/projetos/${next}/`}>
           <span class="h2">{nx.title}</span>
           <span class="muted">{nx.kind}</span>

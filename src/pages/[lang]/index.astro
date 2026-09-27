@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import VideoBand from '../../components/VideoBand.astro';
 import HeroArt from '../../components/HeroArt.astro';
 import Split from '../../components/Split.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
 import Button from '../../components/Button.astro';
 import OctNum from '../../components/OctNum.astro';
 import { WA_PATH } from '../../lib/icons';
@@ -24,13 +25,13 @@ const SVC_IMG = ['svc-sites', 'svc-identidade', 'svc-design', 'svc-estrategia'];
   <VideoBand name="hero" hero id="inicio" labelledby="hero-title">
     <HeroArt slot="art" />
     <div class="hero">
-      <p class="eyebrow load-rise" style="--d:0ms">{s.hero.eyebrow}</p>
+      <Eyebrow class="load-rise" style="--d:0ms">{s.hero.eyebrow}</Eyebrow>
       <Split html={s.hero.title} as="h1" class="display hero__title" id="hero-title" load />
       <div class="hero__foot">
         <p class="lead muted load-rise" style="--d:220ms">{s.hero.lead}</p>
         <div class="hero__ctas load-rise" style="--d:320ms">
           <Button href={`${BASE}/${lang}/#projetos`} variant="primary">{s.hero.primary}</Button>
-          <Button href={waHref} variant="ghost" external arrow={false}>{s.hero.secondary}</Button>
+          <Button href={waHref} variant="ghost" external>{s.hero.secondary}</Button>
         </div>
       </div>
     </div>
@@ -46,7 +47,7 @@ const SVC_IMG = ['svc-sites', 'svc-identidade', 'svc-design', 'svc-estrategia'];
       </figure>
       <div>
         <div class="shead">
-          <p class="eyebrow" data-reveal>{c.about.eyebrow}</p>
+          <Eyebrow n="01" reveal>{c.about.eyebrow}</Eyebrow>
           <Split html={c.about.title} id="sobre-title" />
         </div>
         <div class="about__list">
@@ -66,7 +67,7 @@ const SVC_IMG = ['svc-sites', 'svc-identidade', 'svc-design', 'svc-estrategia'];
   <section class="section svc2 on-light" id="servicos" data-tone="light" aria-labelledby="servicos-title">
     <div class="wrap">
       <div class="shead">
-        <p class="eyebrow" data-reveal>{c.services.eyebrow}</p>
+        <Eyebrow n="02" reveal>{c.services.eyebrow}</Eyebrow>
         <Split html={c.services.title} id="servicos-title" />
       </div>
       <div class="svc2__grid">
@@ -93,7 +94,7 @@ const SVC_IMG = ['svc-sites', 'svc-identidade', 'svc-design', 'svc-estrategia'];
   <!-- PROJETOS (faixa escura 2 de 3) -->
   <VideoBand name="trabalhos" id="projetos" labelledby="projetos-title">
     <div class="band">
-      <p class="eyebrow" data-reveal>{c.index.eyebrow}</p>
+      <Eyebrow n="03" reveal>{c.index.eyebrow}</Eyebrow>
       <Split html={c.index.title} id="projetos-title" />
     </div>
   </VideoBand>
@@ -114,8 +115,8 @@ const SVC_IMG = ['svc-sites', 'svc-identidade', 'svc-design', 'svc-estrategia'];
               <div class="pj__phone" aria-hidden="true"><img src={`${BASE}/img/projetos/${key}-m-480.webp?v=${IMG_V}`} width="480" height="1039" alt="" loading="lazy" decoding="async" /></div>
             </div>
             <div class="pj__meta" data-reveal>
-              <div class="pj__top"><span class="pj__n ltr">{pad(i + 1)}</span></div>
-              <h3 class="h2">{cs.title}</h3>
+              <div class="pj__top"><span class="num ltr">{pad(i + 1)}</span></div>
+              <h3 class={i === 0 ? 'h2' : 'h3'}>{cs.title}</h3>
               <p class="pj__kind">{cs.kind}</p>
               <span class="pj__cta">{s.work.cta}<span class="arrow" aria-hidden="true"></span></span>
             </div>
@@ -131,17 +132,16 @@ const SVC_IMG = ['svc-sites', 'svc-identidade', 'svc-design', 'svc-estrategia'];
     <div class="proc__stage">
       <div class="proc__pat" aria-hidden="true"></div>
       <div class="wrap proc__head">
-        <p class="eyebrow" data-reveal>{c.process.eyebrow}</p>
+        <Eyebrow n="04" reveal>{c.process.eyebrow}</Eyebrow>
         <Split html={c.process.title} id="processo-title" />
       </div>
       <ol class="proc__steps wrap">
         {c.process.steps.map((st, i) => (
           <li class="step">
-            <span class="step__num ltr" aria-hidden="true">{pad(i + 1)}</span>
+            <span class="step__num num ltr" aria-hidden="true">{pad(i + 1)}</span>
             <div class="step__text" data-reveal>
-              <p class="eyebrow"><span class="ltr">{pad(i + 1)} / {pad(c.process.steps.length)}</span></p>
               <h3 class="h2">{st.h}</h3>
-              <p class="lead muted">{st.p}</p>
+              <p class="muted">{st.p}</p>
             </div>
           </li>
         ))}
@@ -159,7 +159,7 @@ const SVC_IMG = ['svc-sites', 'svc-identidade', 'svc-design', 'svc-estrategia'];
   <section class="on-light section why2" id="por-que" data-tone="light" aria-labelledby="why-title">
     <div class="wrap">
       <div class="shead">
-        <p class="eyebrow" data-reveal>{c.why.eyebrow}</p>
+        <Eyebrow n="05" reveal>{c.why.eyebrow}</Eyebrow>
         <Split html={c.why.title} id="why-title" />
       </div>
       <div class="why2__img aperture" aria-hidden="true">
@@ -181,7 +181,7 @@ const SVC_IMG = ['svc-sites', 'svc-identidade', 'svc-design', 'svc-estrategia'];
   <!-- CONTATO (faixa escura 3 de 3) -->
   <VideoBand name="contato" id="contato" labelledby="contato-title" class="vband--contact">
     <div class="band">
-      <p class="eyebrow" data-reveal>{c.contact.eyebrow}</p>
+      <Eyebrow n="06" reveal>{c.contact.eyebrow}</Eyebrow>
       <Split html={c.contact.title} id="contato-title" />
       <p class="lead muted band__lead" data-reveal>{c.contact.p}</p>
       <div class="band__ctas" data-reveal>
@@ -199,10 +199,10 @@ const SVC_IMG = ['svc-sites', 'svc-identidade', 'svc-design', 'svc-estrategia'];
           <Button href={waHref} variant="ghost" external>{s.contact.wa_button}</Button>
         </li>
         {SITE.email && (
-          <li><span class="eyebrow">{s.contact.email}</span><a class="contact__big ulink" href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+          <li><span class="label">{s.contact.email}</span><a class="contact__big ulink" href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
         )}
         {SITE.instagram && (
-          <li><span class="eyebrow">{s.contact.instagram}</span><a class="contact__big ulink ltr" href={`https://instagram.com/${SITE.instagram}`} target="_blank" rel="noopener">@{SITE.instagram}</a></li>
+          <li><span class="label">{s.contact.instagram}</span><a class="contact__big ulink ltr" href={`https://instagram.com/${SITE.instagram}`} target="_blank" rel="noopener">@{SITE.instagram}</a></li>
         )}
       </ul>
       <form class="form" name="contato" method="POST" data-netlify="true" netlify-honeypot="empresa" action={`${BASE}/${lang}/obrigado/`} data-reveal>

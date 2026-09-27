@@ -24,21 +24,37 @@ Código:
 
 Os dois tons de champanhe mais escuros existem só por acessibilidade: o #B89B72 sobre Marfim tem contraste de 2,3:1 e não passa no Lighthouse. Sobre Noite, usa-se sempre o champanhe da marca.
 
-## 2. Tipografia
+## 2. Tipografia (sistema editorial, 27/09/2026)
 
-| Papel | PT / EN | AR |
-|---|---|---|
-| Display (hero) | Prata, `clamp(2.9rem, 7.2vw, 7.2rem)`, altura de linha 1.02 | Reem Kufi a 90%, altura de linha 1.3 |
-| H2 (seções) | Prata, `clamp(2.35rem, 5vw, 4.9rem)` | Reem Kufi a 90% |
-| H3 | Prata, `clamp(1.55rem, 2.3vw, 2.15rem)` | Reem Kufi a 90% |
-| Destaque `<i>` | Noto Serif Display Italic 300, champanhe (itálico verdadeiro) | Reem Kufi em champanhe, sem inclinação |
-| Texto | Albert Sans 17/18 px, altura de linha 1.65 | IBM Plex Sans Arabic 18/19 px, altura de linha 1.8 |
-| Rótulo | Albert Sans 12 px 500, espaçamento .28em, caixa alta, sem marcador (o octógono de 11 px saiu a pedido do usuário) | Plex Arabic 14 px 500, sem caixa alta e sem espaçamento |
+Tokens em `global.css` (`--fs-*`, `--lh-*`, `--ls-*`). Escala modular: celular (390 px) base 17 × 1,25; desktop (1440 px) base 18 × 1,333, arredondada. Cada nível tem **um** tamanho, **uma** entrelinha e **um** espaçamento; nenhum componente define tamanho próprio de título.
 
-- As fontes são hospedadas no próprio site, em woff2 com subconjunto de caracteres (≈ 17–45 KB cada), com pré-carregamento.
-- **Prata e NSD Italic:** `font-display: block`, com fontes de reserva calibradas (`Prata Fallback` = Georgia a 108,65%, `Prata Fallback T` = Times New Roman a 119,2%, `NSD Fallback` = Georgia Italic a 95,5%). O `size-adjust` iguala a largura média dos títulos: se a fonte chega depois do primeiro layout, o título quebra nas mesmas linhas e o hero, ancorado pela base, não pula. Sem isso, o CLS chegava a 0,29 em cerca de 1 a cada 6 carregamentos.
-- **Albert Sans:** `font-display: swap`, com a `Albert Fallback` (Arial com métricas ajustadas), para o texto aparecer sem esperar a fonte.
-- O árabe só carrega em `/ar`.
+| Nível | Classe | Tamanho (390 → 1440) | Entrelinha | Espaçamento | Uso |
+|---|---|---|---|---|---|
+| display | `.display` | 56 → 128 px | .96 | −.02em | Só o título do hero |
+| h1 | `.h1` | 48 → 100 px | .98 | −.02em | Capa da página de projeto e de "obrigado" |
+| h2 | `.h2` | 38 → 76 px | 1.02 | −.02em | Títulos de seção, título da etapa do Processo (desktop), título do projeto em destaque, "Próximo projeto" |
+| h3 | `.h3` | 26,5 → 32 px | 1.12 | −.01em | Itens do Sobre e do Por que nós, cards de Serviços, cards de projeto, blocos da página de projeto, contato, etapa do Processo no carrossel |
+| lead | `.lead` | 19 → 22 px | 1.5 | — | Parágrafo de abertura (hero, bandas); maior e mais escuro (Noite no claro, Marfim no escuro) |
+| body | (padrão) | 17 → 18 px | 1.6 | — | Texto corrido, até 64ch, `text-wrap: pretty` |
+| small | `.small` / menu | 14 px | 1.5 | .01em | Menu, notas, "Voltar", rodapé |
+| micro | `.label` | 11 px, caixa alta | 1.3 | .18em | Rótulos de campo, tags, chips, trilho do Processo, seletor de idioma |
+| botão | `.btn` | 15 px, peso 500, caixa normal | 1 | .01em | Todos os botões, sempre com seta; "Ver projeto" segue o mesmo estilo |
+| número | `.num` | 22 → 26 px | 1 | — | 01, 02, 03 em todas as seções, alinhado pela linha de base com o h3 |
+
+**Fontes**
+- Títulos: **Prata** 400.
+- Destaques `<i>`: **Noto Serif Display Italic 400** (`nsd-italic-400.woff2`, recortada do arquivo oficial do Google Fonts, 21 KB) com `size-adjust: 96,6%`, que iguala a altura de x da Prata (0,518 / 0,536). Mesmo peso de tinta; o peso 300 anterior e a variação com traço reforçado foram descartados (comparação em `capturas/v2/tipografia/italico-A-B.png`).
+- Texto: Albert Sans. Árabe: Reem Kufi (títulos, a 90%) e IBM Plex Sans Arabic (texto), na mesma escala, com entrelinhas maiores (1.25–1.8) e sem espaçamento entre letras; o itálico vira Reem Kufi champanhe sem inclinação.
+- **Reservas calibradas** (sem pulo de layout quando a fonte chega): Prata → Georgia 108,65% / Times 119,2%; NSD → Georgia Italic 98,7%; Albert → Arial com métricas; Reem Kufi → Arial 101,7%; Plex Arabic → Arial 111,1% com `ascent/descent-override`.
+
+**Regras de título**
+- `text-wrap: balance` em todos os títulos.
+- O destaque em itálico sempre começa em linha nova nos níveis display/h1/h2 (`i { display: block }`).
+- `split()` em `lib/i18n.ts` prende palavras de até 2 letras à seguinte com espaço não separável ("à primeira", "to be").
+
+**Rótulo de seção** (`components/Eyebrow.astro`): número em itálico serifado + traço fino de 28 px + nome em caixa normal, 14 px ("01 — Sobre nós"). Numeração da Home: 01 Sobre, 02 Serviços, 03 Projetos, 04 Processo, 05 Por que nós, 06 Contato. Sem número (hero, "Capturas", "Próximo projeto", "obrigado"), o marcador é um octógono de linha de 9 px.
+
+**Cores de texto no claro (WCAG AA)**: `--texto` #4F4B45 (7,6:1 Marfim / 6,5:1 Linho) para texto corrido; `--texto-2` #625D56 (5,7 / 4,9) para secundário; `--champ-ink` #6E5836 (5,9 / 5,1) para números e rótulos. As regras gerais usam `:where()` (especificidade zero) para não sobrepor componentes escuros.
 
 ## 3. Grid e ritmo
 - `.wrap`: largura máxima de 1440 px, margem lateral `clamp(16px, 5vw, 80px)`.
@@ -82,6 +98,7 @@ A página ficou cerca de 30% mais curta que na v1. Medido com `_ferramentas/meas
 | Menu mobile | idem | Tela cheia em Noite, itens em Prata entrando em cascata de 70 ms, Esc fecha, trava a rolagem |
 | Botão | `components/Button.astro` | `primary` (champanhe), `ghost` (contorno de 1 px). No hover, o preenchimento varre a partir do início da linha e a seta anda 4 px. `shine` = reflexo único (só no CTA do contato). Os CTAs principais são magnéticos (`data-magnetic`). |
 | Faixa com vídeo | `components/VideoBand.astro`, `scripts/video.ts` | `hero` (100svh) ou `band` (64vh). Mostra o placeholder até existirem os 3 arquivos em `public/videos`. |
+| Rótulo de seção | `components/Eyebrow.astro` | Ver seção 2. |
 | Título dividido | `components/Split.astro` | Entrada palavra por palavra (0,56 s por palavra, 30 ms entre elas, com cascata limitada a 8 palavras); o texto completo fica em `.sr` para leitores de tela. Com `load`, entra por CSS no carregamento, sem esperar o JavaScript: é usado no hero da Home e na capa das páginas de projeto, junto com `.load-rise` nas linhas de apoio. |
 | Número de item | `components/OctNum.astro` | Número em NSD Italic, sem moldura |
 | Projetos | `.work2` / `.pj`, `scripts/projects.ts` | 5 projetos. O 1º (Ülia Media, site real no ar, `LIVE` em `lib/config.ts`) é o destaque `.pj--feature`: largura total, mockup à esquerda e texto à direita. Os outros 4 formam a grade 2×2 a partir de 900 px (o 2º card de cada linha desce 64 px). Cada card é um mockup de navegador (barra Linho com 3 pontos, janela 16:10) com um celular sobreposto (23% da largura, borda Noite de 6 px). No hover, a captura da página inteira (`public/img/projetos/*-full-720.webp`) rola dentro do navegador: a distância vem da altura real da imagem e a duração é distância/520, entre 3 e 9 s. O celular sobe 10 px, o nome ganha sublinhado champanhe e a seta anda. Cada card mostra só o número (01–05), sem tag e sem aviso sobre marcas fictícias (pedido do usuário). A página de projeto também não mostra a linha de marca/setor; a da Ülia tem um botão "Ver site" para uliamedia.com. |
@@ -186,3 +203,8 @@ Ferramentas em `_ferramentas/`, todas contra `node _ferramentas/serve_dist.js 43
 |---|---|---|
 | Home | 98–99 · 100 · 100 · 100 | 100 nas quatro (6 de 6 execuções) |
 | Projeto (Ambrevel) | 99 · 100 · 100 · 100 | 100 nas quatro |
+
+## 10. Entradas: fail-safe e `?motion=on`
+- **Nada fica em branco:** `scripts/reveal.ts` usa o IntersectionObserver e, além dele, uma varredura (rolagem, `scrollend`, clique em âncora, `hashchange` e 1,2 s após carregar) que revela tudo que já está na altura da tela. No Processo fixado, os textos passam a ser controlados só pelo GSAP (entram visíveis). Teste: `node _ferramentas/ancoras.js [pt|en|ar]` clica em cada link do menu e dá saltos de rolagem, no desktop e no celular.
+- **Efeitos no celular:** a peça do hero tem os 4 anéis que se desenham e giram também abaixo de 1100 px (sem o K, que ficaria atrás do título); o giro contínuo começa 3 s depois, para aliviar a CPU no carregamento.
+- **`?motion=on`**: força os efeitos mesmo com "reduzir movimento" ativo no aparelho (intro, anéis, vídeo, entradas, Processo fixado). A escolha fica salva no aparelho (`localStorage kz-motion`); `?motion=off` volta ao padrão. Implementado com `html.motion-on`: todas as regras `prefers-reduced-motion` do CSS são escopadas com `html:not(.motion-on)` e `reduced()` em `scripts/motion.ts` respeita a classe.

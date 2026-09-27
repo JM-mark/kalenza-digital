@@ -1,0 +1,11 @@
+---
+// Rótulo de seção da Kalenza: número em itálico serifado + traço fino + nome em caixa normal ("01 — Sobre nós").
+// Sem número, o marcador é um octógono pequeno (hero, "próximo projeto"). Ver design-system.md → Tipografia.
+interface Props { n?: string; as?: 'p' | 'span' | 'figcaption'; class?: string; style?: string; reveal?: boolean }
+const { n, as: Tag = 'p', class: cls = '', style, reveal = false } = Astro.props;
+---
+<Tag class:list={['eyebrow', cls]} style={style} data-reveal={reveal ? '' : undefined}>
+  {n ? <span class="eyebrow__n ltr" aria-hidden="true">{n}</span> : <span class="eyebrow__oct" aria-hidden="true"></span>}
+  <span class="eyebrow__rule" aria-hidden="true"></span>
+  <span class="eyebrow__t"><slot /></span>
+</Tag>

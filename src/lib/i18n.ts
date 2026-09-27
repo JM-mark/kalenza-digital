@@ -25,8 +25,21 @@ export const dir = (lang: Lang) => (lang === 'ar' ? 'rtl' : 'ltr');
  */
 export function split(html: string): string {
   let i = 0;
-  const words = (s: string) =>
-    s.split(/(\s+)/).map((w) => (w.trim() ? `<span class="w" style="--i:${i++}">${w}</span>` : w)).join('');
+  // palavras de até 2 letras ("à", "a", "de", "to", "في") ficam presas à seguinte com espaço não separável
+  const glue = (list: string[]) => {
+    const out: string[] = [];
+    for (let k = 0; k < list.length; k++) {
+      let w = list[k];
+      while (k < list.length - 1 && [...w.split('\u00a0').pop()!].length <= 2) w += '\u00a0' + list[++k];
+      out.push(w);
+    }
+    return out;
+  };
+  const words = (s: string) => {
+    const lead = /^\s/.test(s) ? ' ' : '', tail = /\s$/.test(s) ? ' ' : '';
+    const list = glue(s.trim().split(/\s+/).filter(Boolean));
+    return lead + list.map((w) => `<span class="w" style="--i:${i++}">${w}</span>`).join(' ') + tail;
+  };
   return html
     .split(/(<i>[\s\S]*?<\/i>|<br\s*\/?>)/)
     .map((part) => {

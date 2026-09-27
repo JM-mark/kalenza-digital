@@ -35,6 +35,10 @@ function pin(sec: HTMLElement, gsap: typeof import('gsap').gsap, ST: typeof impo
     const fill = sec.querySelector('.rail__fill');
     const n = steps.length;
     sec.classList.add('is-pinned');
+    // os textos entram pelo GSAP, não pelo reveal: se a seção foi aberta pelo menu antes da entrada,
+    // o valor inicial registrado seria opacidade 0 e a 1ª etapa ficaria em branco
+    txts.forEach((t) => t?.classList.add('is-in'));
+    gsap.set([...txts, ...nums], { autoAlpha: 1, y: 0 });
     gsap.set(steps, { autoAlpha: 0 });
     gsap.set(steps[0], { autoAlpha: 1 });
     const mark = (k: number) => nodes.forEach((el, i) => { el.classList.toggle('is-on', i <= k); el.toggleAttribute('aria-current', i === k); });

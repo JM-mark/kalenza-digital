@@ -4,7 +4,8 @@
    ========================================================================== */
 
 @font-face { font-family: 'Prata'; src: url('/fonts/prata.woff2') format('woff2'); font-weight: 400; font-display: block; }
-@font-face { font-family: 'NSD Italic'; src: url('/fonts/nsd-italic-300.woff2') format('woff2'); font-weight: 300; font-style: italic; font-display: block; }
+/* NSD Italic 400: mesmo peso de tinta da Prata; size-adjust iguala a altura de x (Prata 0,518 / NSD 0,536) */
+@font-face { font-family: 'NSD Italic'; src: url('/fonts/nsd-italic-400.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: block; size-adjust: 96.6%; }
 @font-face { font-family: 'Albert Sans'; src: url('/fonts/albert-sans.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
 /* reserva com as medidas da Albert Sans: o texto aparece na hora e não desloca o layout quando a fonte chega */
 @font-face { font-family: 'Albert Fallback'; src: local('Arial'), local('Helvetica Neue'), local('Roboto'); size-adjust: 103.4%; ascent-override: 91.9%; descent-override: 24.2%; line-gap-override: 0%; }
@@ -12,10 +13,14 @@
    o título quebra nas mesmas linhas e o hero (ancorado pela base) não pula (CLS) */
 @font-face { font-family: 'Prata Fallback'; src: local('Georgia'); size-adjust: 108.65%; }
 @font-face { font-family: 'Prata Fallback T'; src: local('Times New Roman'), local('TimesNewRomanPSMT'); size-adjust: 119.2%; }
-@font-face { font-family: 'NSD Fallback'; src: local('Georgia Italic'), local('Georgia-Italic'); font-style: italic; font-weight: 300; size-adjust: 95.5%; }
+@font-face { font-family: 'NSD Fallback'; src: local('Georgia Italic'), local('Georgia-Italic'); font-style: italic; font-weight: 400; size-adjust: 98.7%; }
 @font-face { font-family: 'Reem Kufi'; src: url('/fonts/reem-kufi.woff2') format('woff2'); font-weight: 400 700; font-display: block; }
 @font-face { font-family: 'Plex Arabic'; src: url('/fonts/plex-arabic-regular.woff2') format('woff2'); font-weight: 400; font-display: block; }
 @font-face { font-family: 'Plex Arabic'; src: url('/fonts/plex-arabic-medium.woff2') format('woff2'); font-weight: 500; font-display: block; }
+/* reserva do árabe com a largura média da Reem Kufi nos títulos (Arial tem glifos árabes no Windows/Android) */
+/* reserva do texto árabe com a largura e as métricas verticais da Plex Arabic: o hero não pula quando a fonte chega */
+@font-face { font-family: 'Plex Fallback'; src: local('Arial'), local('Geeza Pro'), local('Noto Sans Arabic'); size-adjust: 111.1%; ascent-override: 97.7%; descent-override: 37.4%; line-gap-override: 0%; }
+@font-face { font-family: 'Reem Fallback'; src: local('Arial'), local('Geeza Pro'), local('Noto Sans Arabic'); size-adjust: 101.7%; }
 
 :root {
   /* Paleta A (marca) */
@@ -28,7 +33,26 @@
   --noite-2: #0B0F17;
   --noite-3: #1A2130;
   --champ-title: #9A7F59;  /* destaque de título sobre fundo claro (≥ 3:1) */
-  --champ-ink: #7D6440;    /* rótulos pequenos sobre fundo claro (≥ 4.5:1) */
+  --champ-ink: #6E5836;    /* rótulos pequenos sobre fundo claro: 5,9:1 no Marfim e 5,1:1 no Linho */
+  --texto: #4F4B45;        /* texto corrido sobre fundo claro: 7,6:1 no Marfim, 6,5:1 no Linho */
+  --texto-2: #625D56;      /* texto secundário sobre fundo claro: 5,7:1 no Marfim, 4,9:1 no Linho */
+
+  /* ---------- escala tipográfica (ver design-system.md → 2) ----------
+     celular (390 px): base 17 × 1,25 · desktop (1440 px): base 18 × 1,333, arredondada.
+     Cada nível tem UM tamanho, UMA entrelinha e UM espaçamento. */
+  --fs-display: clamp(3.5rem, 1.829rem + 6.857vw, 8rem);      /* 56 → 128 */
+  --fs-h1: clamp(3rem, 1.793rem + 4.952vw, 6.25rem);          /* 48 → 100 */
+  --fs-h2: clamp(2.375rem, 1.493rem + 3.619vw, 4.75rem);      /* 38 → 76 */
+  --fs-h3: clamp(1.656rem, 1.529rem + 0.5238vw, 2rem);        /* 26,5 → 32 */
+  --fs-lead: clamp(1.188rem, 1.118rem + 0.2857vw, 1.375rem);  /* 19 → 22 */
+  --fs-body: clamp(1.062rem, 1.039rem + 0.09524vw, 1.125rem); /* 17 → 18 */
+  --fs-small: .875rem;                                        /* 14: menu, notas */
+  --fs-micro: .6875rem;                                       /* 11: rótulos e tags em caixa alta */
+  --fs-btn: .9375rem;                                         /* 15: botões */
+  --fs-num: clamp(1.375rem, 1.282rem + 0.381vw, 1.625rem);    /* 22 → 26: números 01, 02, 03 */
+  --lh-display: .96; --lh-h1: .98; --lh-h2: 1.02; --lh-h3: 1.12; --lh-lead: 1.5; --lh-body: 1.6;
+  --ls-lg: -.02em; --ls-md: -.01em; --ls-micro: .18em;
+  --measure: 64ch;
 
   --f-display: 'Prata', 'Prata Fallback', 'Prata Fallback T', serif;
   --f-accent: 'NSD Italic', 'NSD Fallback', 'Prata', serif;
@@ -48,27 +72,29 @@
 }
 
 html[lang='ar'] {
-  --f-display: 'Reem Kufi', 'Plex Arabic', sans-serif;
-  --f-accent: 'Reem Kufi', 'Plex Arabic', sans-serif;
-  --f-body: 'Plex Arabic', 'Albert Sans', sans-serif;
+  --f-display: 'Reem Kufi', 'Reem Fallback', sans-serif;
+  --f-accent: 'Reem Kufi', 'Reem Fallback', sans-serif;
+  --f-body: 'Plex Arabic', 'Plex Fallback', sans-serif;
   --display-scale: .9;
   --dir: -1;
+  /* árabe: Reem Kufi e Plex Arabic seguem a mesma escala; entrelinhas maiores e nunca espaçamento entre letras */
+  --lh-display: 1.25; --lh-h1: 1.25; --lh-h2: 1.3; --lh-h3: 1.4; --lh-lead: 1.75; --lh-body: 1.8;
+  --ls-lg: 0; --ls-md: 0; --ls-micro: 0;
+  --fs-body: clamp(1.125rem, 1.102rem + 0.09524vw, 1.1875rem); /* 18 → 19 */
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--header-h); }
 body {
   margin: 0; background: var(--marfim); color: var(--noite);
-  font: 400 17px/1.65 var(--f-body);
+  font: 400 var(--fs-body)/var(--lh-body) var(--f-body);
   -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
   overflow-x: clip;
 }
-html[lang='ar'] body { font-size: 18px; line-height: 1.8; }
-@media (min-width: 1200px) { body { font-size: 18px; } html[lang='ar'] body { font-size: 19px; } }
 img, svg, video { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
-p { margin: 0; }
+p { margin: 0; text-wrap: pretty; }
 h1, h2, h3, h4 { margin: 0; font-weight: 400; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 :focus-visible { outline: 1.5px solid var(--champ); outline-offset: 4px; }
@@ -89,25 +115,52 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 @media (min-width: 1100px) { .grid { grid-template-columns: repeat(12, minmax(0, 1fr)); } }
 
 /* ---------- tipografia ---------- */
-.display, .h2, .h3 { font-family: var(--f-display); text-wrap: balance; }
-.display { font-size: calc(clamp(2.9rem, 7.2vw, 7.2rem) * var(--display-scale)); line-height: 1.02; letter-spacing: -.005em; }
-.h2 { font-size: calc(clamp(2.35rem, 5vw, 4.9rem) * var(--display-scale)); line-height: 1.06; }
-.h3 { font-size: calc(clamp(1.55rem, 2.3vw, 2.15rem) * var(--display-scale)); line-height: 1.15; }
-html[lang='ar'] .display, html[lang='ar'] .h2 { line-height: 1.3; }
-html[lang='ar'] .h3 { line-height: 1.4; }
-.display i, .h2 i, .h3 i { font-family: var(--f-accent); font-style: italic; font-weight: 300; color: var(--champ); }
-html[lang='ar'] .display i, html[lang='ar'] .h2 i, html[lang='ar'] .h3 i { font-style: normal; font-weight: 400; }
-.on-light .display i, .on-light .h2 i, .on-light .h3 i { color: var(--champ-title); }
+.display, .h1, .h2, .h3 { font-family: var(--f-display); font-weight: 400; text-wrap: balance; }
+.display { font-size: calc(var(--fs-display) * var(--display-scale)); line-height: var(--lh-display); letter-spacing: var(--ls-lg); }
+.h1 { font-size: calc(var(--fs-h1) * var(--display-scale)); line-height: var(--lh-h1); letter-spacing: var(--ls-lg); }
+.h2 { font-size: calc(var(--fs-h2) * var(--display-scale)); line-height: var(--lh-h2); letter-spacing: var(--ls-lg); }
+.h3 { font-size: calc(var(--fs-h3) * var(--display-scale)); line-height: var(--lh-h3); letter-spacing: var(--ls-md); }
 
-.eyebrow {
-  display: inline-flex; align-items: center; gap: 12px;
-  font: 500 12px/1.2 var(--f-body); letter-spacing: .28em; text-transform: uppercase; color: var(--champ);
+/* destaque em itálico: NSD Italic 400 com a altura de x da Prata (size-adjust), mesmo peso de tinta */
+.display i, .h1 i, .h2 i, .h3 i, .lead i {
+  font-family: var(--f-accent); font-style: italic; font-weight: 400; color: var(--champ);
+  letter-spacing: var(--ls-md);
 }
-.on-light .eyebrow { color: var(--champ-ink); }
-html[lang='ar'] .eyebrow { font-size: 14px; letter-spacing: 0; text-transform: none; font-weight: 500; }
-.lead { font-size: clamp(1.05rem, 1.35vw, 1.25rem); line-height: 1.6; max-width: 34em; }
-.muted { color: rgba(244, 239, 230, .72); }
-.on-light .muted { color: var(--pedra); }
+/* o destaque sempre começa em linha nova nos títulos grandes */
+.display i, .h1 i, .h2 i { display: block; }
+.display i { margin-top: -.06em; } /* a linha em itálico encosta na de cima como as demais */
+.on-light .display i, .on-light .h1 i, .on-light .h2 i, .on-light .h3 i, .on-light .lead i { color: var(--champ-title); }
+html[lang='ar'] :is(.display, .h1, .h2, .h3, .lead) i { font-style: normal; }
+
+.lead { font-size: var(--fs-lead); line-height: var(--lh-lead); max-inline-size: 34em; }
+.on-light .lead { color: var(--noite); }
+.dark .lead { color: var(--marfim); }
+.body { font-size: var(--fs-body); line-height: var(--lh-body); }
+.small { font-size: var(--fs-small); line-height: 1.5; }
+/* texto corrido: 60–68 caracteres por linha */
+/* regras gerais com especificidade zero (:where): qualquer regra local de um componente prevalece */
+:where(.on-light, .dark) p:where(:not([class])), .muted, .body { max-inline-size: var(--measure); }
+:where(.on-light) p:where(:not([class])) { color: var(--texto); }
+:where(.on-light) :where(.dark) p:where(:not([class])) { color: inherit; }
+.muted { color: rgba(244, 239, 230, .74); }
+.on-light .muted { color: var(--texto-2); }
+
+/* rótulo de seção da Kalenza: "01 — Sobre nós" (componente Eyebrow.astro) */
+.eyebrow { display: inline-flex; align-items: baseline; gap: 12px; font: 500 var(--fs-small)/1.2 var(--f-body); letter-spacing: .01em; color: rgba(244, 239, 230, .86); }
+.on-light .eyebrow { color: var(--texto); }
+.eyebrow__n { font: italic 400 1.35em/1 var(--f-accent); color: var(--champ); letter-spacing: 0; }
+.on-light .eyebrow__n { color: var(--champ-ink); }
+.eyebrow__rule { align-self: center; width: 28px; height: 1px; background: currentColor; opacity: .45; }
+.eyebrow__oct { align-self: center; width: 9px; height: 9px; background: var(--champ); -webkit-mask: var(--oct-line) center/contain no-repeat; mask: var(--oct-line) center/contain no-repeat; }
+.on-light .eyebrow__oct { background: var(--champ-ink); }
+.eyebrow__oct + .eyebrow__rule { display: none; }
+html[lang='ar'] .eyebrow { font-size: .9375rem; letter-spacing: 0; }
+html[lang='ar'] .eyebrow__n { font: 400 1.1em/1 var(--f-body); }
+
+/* rótulos e tags: caixa alta, 11 px, espaçamento .18em */
+.label { font: 500 var(--fs-micro)/1.3 var(--f-body); letter-spacing: var(--ls-micro); text-transform: uppercase; color: var(--champ); }
+.on-light .label { color: var(--champ-ink); }
+html[lang='ar'] .label { font-size: .8125rem; text-transform: none; }
 
 :root {
   --oct-line: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7.03 1h9.94L23 7.03v9.94L16.97 23H7.03L1 16.97V7.03z' fill='none' stroke='black' stroke-width='1.6'/%3E%3C/svg%3E");
@@ -127,11 +180,11 @@ html[lang='ar'] .eyebrow { font-size: 14px; letter-spacing: 0; text-transform: n
   --bg: var(--noite);
   position: relative; isolation: isolate; display: inline-flex; align-items: center; justify-content: center; gap: 14px;
   min-height: 52px; padding: 0 28px; white-space: nowrap;
-  font: 500 13px/1 var(--f-body); letter-spacing: .16em; text-transform: uppercase;
+  font: 500 var(--fs-btn)/1 var(--f-body); letter-spacing: .01em;
   clip-path: polygon(var(--chamfer) 0, calc(100% - var(--chamfer)) 0, 100% var(--chamfer), 100% calc(100% - var(--chamfer)), calc(100% - var(--chamfer)) 100%, var(--chamfer) 100%, 0 calc(100% - var(--chamfer)), 0 var(--chamfer));
   transition: color .6s var(--ease);
 }
-html[lang='ar'] .btn { font-size: 15px; letter-spacing: 0; text-transform: none; }
+html[lang='ar'] .btn { font-size: 1rem; letter-spacing: 0; }
 .btn::before { content: ''; position: absolute; inset: 0; z-index: -1; transform: scaleX(0); transform-origin: var(--from, left); transition: transform .7s var(--ease); }
 html[dir='rtl'] .btn { --from: right; }
 .btn:hover::before, .btn:focus-visible::before { transform: scaleX(1); }
@@ -161,11 +214,11 @@ html[dir='rtl'] .ulink { --from: right; }
 .ulink:hover::after, .ulink:focus-visible::after, .ulink[aria-current]::after { transform: scaleX(1); }
 .ulink[aria-current]::after { background: var(--champ); }
 
-/* marcador numerado: número dentro de um octógono de linha que se desenha */
-.octnum { display: inline-block; min-width: 1.6em; flex: none; padding-top: .12em;
-  font: italic 300 28px/1 var(--f-accent); color: var(--champ); font-variant-numeric: lining-nums; }
-html[lang='ar'] .octnum { font: 400 22px/1 var(--f-body); }
-.on-light .octnum { color: var(--champ-ink); }
+/* números de item (01, 02, 03): mesmo tamanho e alinhamento em todas as seções */
+.num, .octnum { display: inline-block; min-width: 2.2ch; flex: none; font: italic 400 var(--fs-num)/1 var(--f-accent);
+  color: var(--champ); font-variant-numeric: lining-nums; }
+.on-light .num, .on-light .octnum { color: var(--champ-ink); }
+html[lang='ar'] :is(.num, .octnum) { font: 400 calc(var(--fs-num) * .85)/1 var(--f-body); }
 
 /* ---------- entrada: palavras, reveal, abertura octogonal ---------- */
 .split .w { display: inline-block; }
@@ -190,10 +243,11 @@ html[lang='ar'] .octnum { font: 400 22px/1 var(--f-body); }
 
 /* movimento reduzido: tudo aparece de imediato, nada desliza nem pulsa */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition-duration: 0s !important; transition-delay: 0s !important; scroll-behavior: auto !important; }
-  .js .split:not(.is-in) .w, .js [data-reveal]:not(.is-in) { opacity: 1; transform: none; }
-  .js .aperture:not(.is-in) { clip-path: none; }
-  .js .aperture:not(.is-in) > img { transform: none; }
+  html:not(.motion-on) *, html:not(.motion-on) *::before, html:not(.motion-on) *::after { animation: none !important; transition-duration: 0s !important; transition-delay: 0s !important; scroll-behavior: auto !important; }
+  html.js:not(.motion-on) .split:not(.is-in) .w, html.js:not(.motion-on) [data-reveal]:not(.is-in) { opacity: 1; transform: none; }
+  html.js:not(.motion-on) .aperture:not(.is-in) { clip-path: none; }
+  html.js:not(.motion-on) .aperture:not(.is-in) > img { transform: none; }
+
 }
 
 /* ---------- transição entre páginas ---------- */
@@ -202,4 +256,6 @@ html[lang='ar'] .octnum { font: 400 22px/1 var(--f-body); }
 ::view-transition-new(root) { animation: vt-in .5s var(--ease) both; }
 @keyframes vt-out { to { opacity: 0; transform: translateY(-12px); } }
 @keyframes vt-in { from { opacity: 0; transform: translateY(16px); } }
-@media (prefers-reduced-motion: reduce) { ::view-transition-old(root), ::view-transition-new(root) { animation: none; } }
+@media (prefers-reduced-motion: reduce) {
+  html:not(.motion-on)::view-transition-old(root), html:not(.motion-on)::view-transition-new(root) { animation: none; }
+}

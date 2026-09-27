@@ -23,7 +23,7 @@ const langs: [Lang, string][] = SELECTOR_LANGS.map((l) => [l, LABEL[l]]);
           <a class="ulink" href={`${BASE}/${l}/${path}`} hreflang={l} lang={l} aria-current={l === lang ? 'true' : undefined}>{label}</a>
         ))}
       </div>
-      <Button href={wa(c.wa_text)} variant="ghost" arrow={false} external class="hdr__cta" magnetic>{s.nav.cta}</Button>
+      <Button href={wa(c.wa_text)} variant="ghost" external class="hdr__cta" magnetic>{s.nav.cta}</Button>
       <button class="hdr__burger" type="button" aria-expanded="false" aria-controls="menu" data-open={s.nav.menu} data-close={s.nav.close}>
         <span class="sr">{s.nav.menu}</span><i></i><i></i>
       </button>
