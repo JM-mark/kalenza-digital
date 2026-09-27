@@ -162,6 +162,7 @@ html[dir='rtl'] .vband--hero .vband__scrim { background:
 .pj__top { display: flex; align-items: center; gap: 14px; }
 /* o card de destaque (1º) usa o nível h2; os demais, h3 */
 .pj__meta :is(.h2, .h3) { position: relative; justify-self: start; }
+.pj__meta .h2 { margin-top: .14em; } /* respiro para acentos altos (trema do Ü) sob o número */
 .pj__meta :is(.h2, .h3)::after { content: ''; position: absolute; inset-inline: 0; bottom: -6px; height: 1px; background: var(--champ); transform: scaleX(0); transform-origin: var(--from, left); transition: transform .8s var(--ease); }
 html[dir='rtl'] .pj__meta :is(.h2, .h3) { --from: right; }
 .pj__kind { font-size: var(--fs-small); font-weight: 500; color: var(--texto); }
