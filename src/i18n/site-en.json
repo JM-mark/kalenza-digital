@@ -47,7 +47,15 @@
     "mail": "Email",
     "message": "Message",
     "send": "Send message",
-    "note": "We reply within 24 hours."
+    "note": "We reply within 24 hours.",
+    "sending": "Sending…",
+    "sent": "Message sent. We reply within 24 hours.",
+    "error": "We couldn't send it right now. Please try again or reach us on WhatsApp.",
+    "rate": "Too many attempts in a row. Please wait a minute and try again.",
+    "invalid": "Please check the fields: name, a valid email and a message of at least 10 characters.",
+    "captcha": "We couldn't verify the submission. Reload the page and try again.",
+    "privacy": "We use your details only to reply to this message. Nothing is stored on the site.",
+    "noscript": "To use the form, please enable JavaScript, or reach us on WhatsApp."
   },
   "footer": {
     "rights": "All rights reserved.",

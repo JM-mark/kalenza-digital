@@ -161,6 +161,10 @@ html[lang='ar'] .field span { font-size: .8125rem; text-transform: none; }
 .field input:focus, .field textarea:focus { outline: 0; border-bottom-color: var(--champ); }
 .form__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; margin-top: 6px; }
 .form__note { font-size: var(--fs-small); }
+.form__note.is-error { color: #E8B4A0; }
+.form__captcha:empty { display: none; }
+.form__privacy { max-inline-size: 44em; }
+.form .btn:disabled { opacity: .55; cursor: not-allowed; }
 @media (min-width: 1100px) {
   .contact__lines { grid-column: 1 / span 5; }
   .form { grid-column: 7 / span 6; }

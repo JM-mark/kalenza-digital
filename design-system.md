@@ -208,3 +208,35 @@ Ferramentas em `_ferramentas/`, todas contra `node _ferramentas/serve_dist.js 43
 - **Nada fica em branco:** `scripts/reveal.ts` usa o IntersectionObserver e, além dele, uma varredura (rolagem, `scrollend`, clique em âncora, `hashchange` e 1,2 s após carregar) que revela tudo que já está na altura da tela. No Processo fixado, os textos passam a ser controlados só pelo GSAP (entram visíveis). Teste: `node _ferramentas/ancoras.js [pt|en|ar]` clica em cada link do menu e dá saltos de rolagem, no desktop e no celular.
 - **Efeitos no celular:** a peça do hero tem os 4 anéis que se desenham e giram também abaixo de 1100 px (sem o K, que ficaria atrás do título); o giro contínuo começa 3 s depois, para aliviar a CPU no carregamento.
 - **`?motion=on`**: força os efeitos mesmo com "reduzir movimento" ativo no aparelho (intro, anéis, vídeo, entradas, Processo fixado). A escolha fica salva no aparelho (`localStorage kz-motion`); `?motion=off` volta ao padrão. Implementado com `html.motion-on`: todas as regras `prefers-reduced-motion` do CSS são escopadas com `html:not(.motion-on)` e `reduced()` em `scripts/motion.ts` respeita a classe.
+
+## 11. Backend e segurança
+O site é estático (Astro → `dist/`) servido por um **Cloudflare Worker** (`worker/`, configurado em `wrangler.jsonc`). O Worker só entra em duas rotas; todo o resto é arquivo estático.
+
+| Rota | O que faz |
+|---|---|
+| `GET /` | Redireciona para `/pt/`, `/en/` ou `/ar/` (`?lang=` válido → `Accept-Language` com peso q → PT). Substitui o `_redirects` da Netlify. |
+| `POST /api/contato` | Formulário de contato (`worker/contato.ts`). |
+
+**Camadas do formulário** (qualquer falha encerra sem enviar):
+1. Só `POST`, só do próprio site (`Origin` e `Sec-Fetch-Site`, contra CSRF), só formulário (`415` para outros tipos), corpo de até 16 KB (`413`), nenhum arquivo aceito.
+2. Limite de 5 envios por minuto por IP (binding `LIMITER`). Se o serviço de limite falhar, segue, porque o Turnstile continua obrigatório.
+3. Campo-armadilha `empresa` (invisível): quem preenche recebe "ok" e nada é enviado.
+4. Validação e limpeza: nome 2–100, e-mail válido até 254, mensagem 10–4000; remove caracteres de controle e invisíveis de direção; nome e e-mail sem quebra de linha (sem injeção de cabeçalho).
+5. **Cloudflare Turnstile** verificado no servidor, com `action` e, em produção, `TURNSTILE_HOSTNAME`. Sem o segredo configurado, recusa tudo (fail closed).
+6. Envio só em texto puro, com o e-mail do visitante em `Reply-To` (nunca em `From`) e assunto codificado (RFC 2047). Entrega pelo **Email Routing da Cloudflare** (binding `MAIL`) ou pela Resend (`RESEND_API_KEY`).
+- Nada é gravado; o log registra só o resultado (`ok`, `captcha`, `rate`…), nunca nome, e-mail ou mensagem.
+- No site: Turnstile carregado só quando o formulário se aproxima; envio sem recarregar a página, com mensagens nos 3 idiomas; aviso de privacidade; sem JavaScript, aparece o convite para o WhatsApp. O formulário só existe no HTML se `PUBLIC_TURNSTILE_SITEKEY` estiver definido no build (a prévia do GitHub Pages sai sem formulário).
+
+**Cabeçalhos** (`dist/_headers`, gerado por `scripts/security-headers.mjs` a cada `npm run build`):
+- `Content-Security-Policy`: scripts só do próprio site, do Turnstile e os 2 scripts embutidos, liberados pelo hash SHA-256; `frame-ancestors 'none'`, `base-uri 'none'`, `object-src 'none'`, `form-action 'self'`.
+- `Strict-Transport-Security` (1 ano, subdomínios), `X-Content-Type-Options`, `X-Frame-Options: DENY`, `Referrer-Policy`, `Cross-Origin-Opener-Policy`, `Permissions-Policy` (câmera, microfone, localização, pagamento, USB e tópicos desligados).
+- Observações aceitas: `style-src 'unsafe-inline'` (estilos embutidos e variáveis CSS; não executam código) e HSTS sem `preload` até o domínio definitivo estar no ar.
+
+**Testes**: `node scripts/testa-contato.mjs http://127.0.0.1:8787` com o Worker local rodando (17 casos: métodos, CSRF, tipos, tamanho, injeção de cabeçalho, arquivos, armadilha, Turnstile, limite por IP, envio válido). Chaves de teste públicas do Turnstile: site `1x00000000000000000000AA`, segredo `1x0000000000000000000000000000000AA` (sempre aprova) ou `2x0000000000000000000000000000000AA` (sempre reprova), no `.dev.vars` (fora do git).
+
+**Publicar na Cloudflare** (quando houver domínio):
+1. Domínio na Cloudflare; no painel, **Turnstile** → criar widget para o domínio → copiar a chave do site e a secreta.
+2. **Email Routing** → ativar no domínio e verificar o e-mail que recebe as mensagens; no `wrangler.jsonc`, descomentar `send_email` e preencher `CONTACT_TO`, `CONTACT_FROM` (ex.: `site@dominio`) e `TURNSTILE_HOSTNAME`.
+3. `wrangler secret put TURNSTILE_SECRET` (o segredo nunca vai para o repositório).
+4. Build com `PUBLIC_TURNSTILE_SITEKEY=<chave do site> npm run build` e `wrangler deploy`; ligar o domínio ao Worker (Custom Domain).
+5. Recomendado: 2FA nas contas Cloudflare e GitHub; regra de WAF/Rate Limiting para `/api/contato`; depois de estável, HSTS com `preload` e inscrição em hstspreload.org.

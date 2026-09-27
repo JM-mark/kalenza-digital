@@ -7,6 +7,7 @@ import { initHeroArt } from './hero-art';
 import { initMagnetic } from './magnetic';
 import { initServices } from './services';
 import { initProjects } from './projects';
+import { initForm } from './form';
 
 initReveal();
 initHeader();
@@ -17,3 +18,4 @@ initHeroArt();
 initMagnetic();
 initServices();
 initProjects();
+initForm();

@@ -47,4 +47,9 @@ export type VideoName = (typeof VIDEOS)[number];
 // Prefixo do site quando publicado numa subpasta (GitHub Pages): vem de `base` em astro.config.mjs. Vazio na raiz.
 export const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
+// Formulário de contato: só aparece quando o backend (worker/contato.ts) e o Turnstile estão configurados.
+// PUBLIC_TURNSTILE_SITEKEY vem do ambiente de build; PUBLIC_FORM=off esconde o formulário (prévia no GitHub Pages).
+export const TURNSTILE_SITEKEY = import.meta.env.PUBLIC_TURNSTILE_SITEKEY ?? '';
+export const FORM = !!TURNSTILE_SITEKEY && import.meta.env.PUBLIC_FORM !== 'off';
+
 export const wa = (text: string) => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;

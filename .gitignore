@@ -21,3 +21,10 @@ _ferramentas/lh-*.json
 # capturas de conferência (pesadas; geradas pelas ferramentas)
 capturas/
 _demos/capturas/
+
+# segredos locais do Worker e ambiente
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+.wrangler/

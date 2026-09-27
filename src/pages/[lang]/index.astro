@@ -7,7 +7,7 @@ import Eyebrow from '../../components/Eyebrow.astro';
 import Button from '../../components/Button.astro';
 import OctNum from '../../components/OctNum.astro';
 import { WA_PATH } from '../../lib/icons';
-import { BUILD_LANGS, CASES, FULL_H, SITE, wa, type Lang, IMG_V, BASE } from '../../lib/config';
+import { BUILD_LANGS, CASES, FULL_H, SITE, wa, type Lang, IMG_V, BASE, FORM, TURNSTILE_SITEKEY } from '../../lib/config';
 import { t, pad } from '../../lib/i18n';
 
 export function getStaticPaths() {
@@ -205,19 +205,25 @@ const SVC_IMG = ['svc-sites', 'svc-identidade', 'svc-design', 'svc-estrategia'];
           <li><span class="label">{s.contact.instagram}</span><a class="contact__big ulink ltr" href={`https://instagram.com/${SITE.instagram}`} target="_blank" rel="noopener">@{SITE.instagram}</a></li>
         )}
       </ul>
-      <form class="form" name="contato" method="POST" data-netlify="true" netlify-honeypot="empresa" action={`${BASE}/${lang}/obrigado/`} data-reveal>
-        <input type="hidden" name="form-name" value="contato" />
+      {FORM && (
+      <form class="form" method="POST" action="/api/contato" data-form data-reveal
+        data-msg-sending={s.contact.sending} data-msg-ok={s.contact.sent} data-msg-error={s.contact.error}
+        data-msg-rate={s.contact.rate} data-msg-invalid={s.contact.invalid} data-msg-captcha={s.contact.captcha}>
         <input type="hidden" name="idioma" value={lang} />
-        <p class="sr"><label>Empresa <input name="empresa" tabindex="-1" autocomplete="off" /></label></p>
+        <p class="sr" aria-hidden="true"><label>Empresa <input name="empresa" tabindex="-1" autocomplete="off" /></label></p>
         <h3 class="h3">{s.contact.form_title}</h3>
-        <label class="field"><span>{s.contact.name}</span><input name="nome" autocomplete="name" required /></label>
-        <label class="field"><span>{s.contact.mail}</span><input name="email" type="email" autocomplete="email" required /></label>
-        <label class="field"><span>{s.contact.message}</span><textarea name="mensagem" rows="3" required></textarea></label>
+        <label class="field"><span>{s.contact.name}</span><input name="nome" autocomplete="name" required minlength="2" maxlength="100" /></label>
+        <label class="field"><span>{s.contact.mail}</span><input name="email" type="email" autocomplete="email" required maxlength="254" /></label>
+        <label class="field"><span>{s.contact.message}</span><textarea name="mensagem" rows="3" required minlength="10" maxlength="4000"></textarea></label>
+        <div class="form__captcha" data-sitekey={TURNSTILE_SITEKEY} data-lang={lang === 'pt' ? 'pt-br' : lang}></div>
+        <p class="form__privacy small muted">{s.contact.privacy}</p>
         <div class="form__foot">
-          <button class="btn btn--ghost" type="submit" data-magnetic><span>{s.contact.send}</span><span class="arrow" aria-hidden="true"></span></button>
-          <p class="muted form__note">{s.contact.note}</p>
+          <button class="btn btn--ghost" type="submit" data-magnetic disabled><span>{s.contact.send}</span><span class="arrow" aria-hidden="true"></span></button>
+          <p class="muted form__note" role="status" aria-live="polite" data-status>{s.contact.note}</p>
         </div>
+        <noscript><p class="form__note">{s.contact.noscript}</p></noscript>
       </form>
+      )}
     </div>
   </section>
 </Base>

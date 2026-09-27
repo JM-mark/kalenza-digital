@@ -47,7 +47,15 @@
     "mail": "E-mail",
     "message": "Mensagem",
     "send": "Enviar mensagem",
-    "note": "Respondemos em até 24 horas."
+    "note": "Respondemos em até 24 horas.",
+    "sending": "Enviando…",
+    "sent": "Mensagem enviada. Respondemos em até 24 horas.",
+    "error": "Não foi possível enviar agora. Tente de novo ou fale pelo WhatsApp.",
+    "rate": "Muitas tentativas seguidas. Aguarde um minuto e tente de novo.",
+    "invalid": "Confira os campos: nome, um e-mail válido e uma mensagem de pelo menos 10 caracteres.",
+    "captcha": "Não conseguimos confirmar o envio. Recarregue a página e tente de novo.",
+    "privacy": "Usamos seus dados só para responder a esta mensagem. Nada é guardado no site.",
+    "noscript": "Para enviar pelo formulário, ative o JavaScript, ou fale conosco pelo WhatsApp."
   },
   "footer": {
     "rights": "Todos os direitos reservados.",
