@@ -248,3 +248,11 @@ O site é estático (Astro → `dist/`) servido por um **Cloudflare Worker** (`w
 3. `wrangler secret put TURNSTILE_SECRET` (o segredo nunca vai para o repositório).
 4. Build com `PUBLIC_TURNSTILE_SITEKEY=<chave do site> npm run build` e `wrangler deploy`; ligar o domínio ao Worker (Custom Domain).
 5. Recomendado: 2FA nas contas Cloudflare e GitHub; regra de WAF/Rate Limiting para `/api/contato`; depois de estável, HSTS com `preload` e inscrição em hstspreload.org.
+
+## 12. SEO e compartilhamento
+- `sitemap.xml`: gerado a cada build (`scripts/sitemap.mjs`), com todas as páginas nos 3 idiomas e as versões alternativas (hreflang + x-default); fora ficam a raiz, "obrigado" e 404.
+- `robots.txt` (`public/`): libera tudo, bloqueia `/api/` e aponta o sitemap. A Cloudflare acrescenta por cima os "content signals" dela, sem mudar as regras.
+- Imagem de compartilhamento 1200×630 por idioma (`public/og/og-{pt,en,ar}.jpg`, geradas por `_ferramentas/og_imagens.js`), com `og:image` e `twitter:card summary_large_image` no `Base.astro`.
+- Ícones: `favicon.svg` (principal), `favicon.ico` (32 px) e `apple-touch-icon.png` (180 px).
+- `Base.astro` aceita `noindex`: a página recebe `robots noindex, follow` e deixa de declarar canonical e hreflang (usado em "obrigado" e na 404).
+- Google Search Console: propriedade de domínio verificada pelo TXT `google-site-verification=…` no DNS da Cloudflare. Não remover o registro.
