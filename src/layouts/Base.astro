@@ -49,15 +49,18 @@ const fonts = lang === 'ar' ? ['reem-kufi', 'plex-arabic-regular'] : ['prata', '
   {fonts.map((f) => <link rel="preload" href={`${BASE}/fonts/${f}.woff2`} as="font" type="font/woff2" crossorigin />)}
   <script is:inline>
     // js ativo + abertura só na primeira visita da sessão (nunca com movimento reduzido)
-    // ?motion=on força os efeitos mesmo com "reduzir movimento" ligado no aparelho (salvo neste aparelho); ?motion=off volta ao padrão
+    // Efeitos completos SEMPRE ligados (celular e desktop, mesmo com "reduzir movimento" no aparelho), como no site da Ülia.
+    // Só ?motion=off desliga, e a escolha fica salva neste aparelho; ?motion=on volta a ligar.
     (function () {
       var d = document.documentElement; d.classList.add('js');
+      var on = true;
       try {
         var m = new URLSearchParams(location.search).get('motion');
-        if (m === 'on') localStorage.setItem('kz-motion', 'on');
-        if (m === 'off') localStorage.removeItem('kz-motion');
-        if (localStorage.getItem('kz-motion') === 'on') d.classList.add('motion-on');
+        if (m === 'off') localStorage.setItem('kz-motion', 'off');
+        if (m === 'on') localStorage.removeItem('kz-motion');
+        on = localStorage.getItem('kz-motion') !== 'off';
       } catch (e) {}
+      if (on) d.classList.add('motion-on');
       try {
         var calm = matchMedia('(prefers-reduced-motion: reduce)').matches && !d.classList.contains('motion-on');
         if (!calm && !sessionStorage.getItem('kz-intro')) {
