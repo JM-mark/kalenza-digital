@@ -9,7 +9,7 @@ BUN="${BUN:-$HOME/.bun/bin/bun.exe}"; [ -x "$BUN" ] || BUN=bun
 REMOTE=$(git remote get-url origin)
 TMP=$(mktemp -d)
 
-MSYS_NO_PATHCONV=1 SITE_URL=https://jm-mark.github.io BASE_PATH=/kalenza-digital "$BUN" run build
+MSYS_NO_PATHCONV=1 SITE_URL=https://jm-mark.github.io BASE_PATH=/kalenza-digital PUBLIC_FORM=off "$BUN" run build
 cp -r dist/. "$TMP/"
 touch "$TMP/.nojekyll"   # o Pages não deve ignorar a pasta _astro
 rm -f "$TMP/_redirects"  # regra da Netlify; no Pages a raiz usa o redirecionamento em JS

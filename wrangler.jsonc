@@ -1,5 +1,5 @@
-// Cloudflare Worker: serve o site (dist/) e o backend do formulário (worker/).
-// Antes do primeiro deploy, ver "Publicar na Cloudflare" em design-system.md (seção 11).
+// Cloudflare Worker: serve o site (dist/) e o backend do formulário (worker/) em kalenzadigital.com.
+// Publicar: npm run deploy (build + wrangler deploy). Segredo: wrangler secret put TURNSTILE_SECRET
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "kalenza-digital",
@@ -8,21 +8,29 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    // o Worker só entra na raiz (idioma) e na API; o resto é arquivo estático direto
-    "run_worker_first": ["/", "/api/*"]
+    // o Worker vê todos os pedidos (redireciona www, escolhe o idioma na raiz, atende a API) e repassa o resto aos arquivos;
+    // os cabeçalhos de dist/_headers continuam valendo nas respostas dos arquivos
+    "run_worker_first": true
   },
+  // domínio próprio (a Cloudflare cria o DNS e o certificado); www redireciona para o domínio principal
+  "routes": [
+    { "pattern": "kalenzadigital.com", "custom_domain": true },
+    { "pattern": "www.kalenzadigital.com", "custom_domain": true }
+  ],
+  "workers_dev": false,
   // 5 envios por minuto por IP no formulário
   "ratelimits": [
     { "name": "LIMITER", "namespace_id": "4201", "simple": { "limit": 5, "period": 60 } }
   ],
+  // e-mail do formulário pelo Email Routing (o destino precisa estar verificado no painel)
+  "send_email": [
+    { "name": "MAIL", "destination_address": "kalenza.suporte@gmail.com" }
+  ],
   "observability": { "enabled": true },
   "vars": {
-    // domínio de produção (o token do Turnstile precisa ter sido gerado nele) e endereços do e-mail
-    "TURNSTILE_HOSTNAME": "",
-    "CONTACT_TO": "",
-    "CONTACT_FROM": ""
+    "TURNSTILE_HOSTNAME": "kalenzadigital.com",
+    "CONTACT_TO": "kalenza.suporte@gmail.com",
+    "CONTACT_FROM": "formulario@kalenzadigital.com"
   }
-  // Envio pelo Email Routing da Cloudflare (domínio no Cloudflare + destino verificado):
-  // "send_email": [{ "name": "MAIL", "destination_address": "seu-email@dominio.com" }]
-  // Segredos (nunca neste arquivo): wrangler secret put TURNSTILE_SECRET  (e, se usar Resend, RESEND_API_KEY)
+  // Segredo (nunca neste arquivo): wrangler secret put TURNSTILE_SECRET
 }

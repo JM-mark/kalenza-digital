@@ -32,6 +32,11 @@ function withSecurity(res: Response): Response {
 export default {
   async fetch(req: Request, env: Env): Promise<Response> {
     const url = new URL(req.url);
+    // www → domínio principal (um endereço só para o Google e para os links compartilhados)
+    if (url.hostname.startsWith('www.')) {
+      url.hostname = url.hostname.slice(4);
+      return withSecurity(new Response(null, { status: 301, headers: { Location: url.toString() } }));
+    }
     if (url.pathname === '/api/contato') return withSecurity(await handleContato(req, env));
     if (url.pathname.startsWith('/api/')) return withSecurity(new Response('Not found', { status: 404 }));
     if (url.pathname === '/' && (req.method === 'GET' || req.method === 'HEAD')) {

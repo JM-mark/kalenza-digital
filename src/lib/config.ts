@@ -2,7 +2,7 @@
 // o site mostra um espaço reservado e deixa o item fora do JSON-LD.
 export const SITE = {
   name: 'Kalenza Digital',
-  domain: null as string | null, // ex.: 'https://kalenzadigital.com'
+  domain: 'https://kalenzadigital.com' as string | null,
   email: null as string | null,
   instagram: null as string | null, // só o @, sem a URL
   whatsapp: '5519997429372',
@@ -48,8 +48,9 @@ export type VideoName = (typeof VIDEOS)[number];
 export const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 // Formulário de contato: só aparece quando o backend (worker/contato.ts) e o Turnstile estão configurados.
-// PUBLIC_TURNSTILE_SITEKEY vem do ambiente de build; PUBLIC_FORM=off esconde o formulário (prévia no GitHub Pages).
-export const TURNSTILE_SITEKEY = import.meta.env.PUBLIC_TURNSTILE_SITEKEY ?? '';
+// Chave pública do widget "Kalenza Digital - formulario de contato" (Turnstile, domínio kalenzadigital.com).
+// PUBLIC_FORM=off esconde o formulário (prévia no GitHub Pages, que não tem backend).
+export const TURNSTILE_SITEKEY = import.meta.env.PUBLIC_TURNSTILE_SITEKEY || '0x4AAAAAAFH59v9n2RWITc9v';
 export const FORM = !!TURNSTILE_SITEKEY && import.meta.env.PUBLIC_FORM !== 'off';
 
 export const wa = (text: string) => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
