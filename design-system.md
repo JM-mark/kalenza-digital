@@ -240,7 +240,9 @@ O site é estático (Astro → `dist/`) servido por um **Cloudflare Worker** (`w
 
 **Testes**: `node scripts/testa-contato.mjs http://127.0.0.1:8787` com o Worker local rodando (17 casos: métodos, CSRF, tipos, tamanho, injeção de cabeçalho, arquivos, armadilha, Turnstile, limite por IP, envio válido). Chaves de teste públicas do Turnstile: site `1x00000000000000000000AA`, segredo `1x0000000000000000000000000000000AA` (sempre aprova) ou `2x0000000000000000000000000000000AA` (sempre reprova), no `.dev.vars` (fora do git).
 
-**Publicar na Cloudflare** (quando houver domínio):
+**Em produção desde 28/09/2026** em https://kalenzadigital.com (Worker `kalenza-digital`, domínios `kalenzadigital.com` e `www.kalenzadigital.com`). Atualizar o site: `npm run deploy`. Os passos abaixo ficam como referência para refazer a configuração.
+
+**Publicar na Cloudflare** (referência):
 1. Domínio na Cloudflare; no painel, **Turnstile** → criar widget para o domínio → copiar a chave do site e a secreta.
 2. **Email Routing** → ativar no domínio e verificar o e-mail que recebe as mensagens; no `wrangler.jsonc`, descomentar `send_email` e preencher `CONTACT_TO`, `CONTACT_FROM` (ex.: `site@dominio`) e `TURNSTILE_HOSTNAME`.
 3. `wrangler secret put TURNSTILE_SECRET` (o segredo nunca vai para o repositório).
