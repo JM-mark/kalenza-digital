@@ -9,8 +9,8 @@ import Intro from '../components/Intro.astro';
 import { SITE, BUILD_LANGS, HREFLANG, type Lang, BASE } from '../lib/config';
 import { t, dir } from '../lib/i18n';
 
-interface Props { lang: Lang; title: string; description: string; path?: string }
-const { lang, title, description, path = '' } = Astro.props;
+interface Props { lang: Lang; title: string; description: string; path?: string; noindex?: boolean }
+const { lang, title, description, path = '', noindex = false } = Astro.props;
 const c = t(lang);
 const base = Astro.site!.href.replace(/\/$/, '') + BASE;
 const url = (l: Lang) => `${base}/${l}/${path}`;
@@ -35,17 +35,28 @@ const fonts = lang === 'ar' ? ['reem-kufi', 'plex-arabic-regular'] : ['prata', '
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>{title}</title>
   <meta name="description" content={description} />
-  <link rel="canonical" href={url(lang)} />
-  {BUILD_LANGS.map((l) => <link rel="alternate" hreflang={HREFLANG[l]} href={url(l)} />)}
-  <link rel="alternate" hreflang="x-default" href={url('pt')} />
+  {!noindex && <link rel="canonical" href={url(lang)} />}
+  {!noindex && BUILD_LANGS.map((l) => <link rel="alternate" hreflang={HREFLANG[l]} href={url(l)} />)}
+  {!noindex && <link rel="alternate" hreflang="x-default" href={url('pt')} />}
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Kalenza Digital" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={url(lang)} />
   <meta property="og:locale" content={HREFLANG[lang].replace('-', '_')} />
+  <meta property="og:image" content={`${base}/og/og-${lang}.jpg`} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={title} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={`${base}/og/og-${lang}.jpg`} />
+  {noindex && <meta name="robots" content="noindex, follow" />}
   <meta name="theme-color" content="#10151F" />
+  <link rel="icon" href={`${BASE}/favicon.ico`} sizes="32x32" />
   <link rel="icon" href={`${BASE}/favicon.svg`} type="image/svg+xml" />
+  <link rel="apple-touch-icon" href={`${BASE}/apple-touch-icon.png`} />
   {fonts.map((f) => <link rel="preload" href={`${BASE}/fonts/${f}.woff2`} as="font" type="font/woff2" crossorigin />)}
   <script is:inline>
     // js ativo + abertura só na primeira visita da sessão (nunca com movimento reduzido)

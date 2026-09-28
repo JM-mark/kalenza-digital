@@ -10,7 +10,9 @@
     "binding": "ASSETS",
     // o Worker vê todos os pedidos (redireciona www, escolhe o idioma na raiz, atende a API) e repassa o resto aos arquivos;
     // os cabeçalhos de dist/_headers continuam valendo nas respostas dos arquivos
-    "run_worker_first": true
+    "run_worker_first": true,
+    // endereço inexistente → dist/404.html (com status 404)
+    "not_found_handling": "404-page"
   },
   // domínio próprio (a Cloudflare cria o DNS e o certificado); www redireciona para o domínio principal
   "routes": [

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/security-headers.mjs",
+    "build": "astro build && node scripts/sitemap.mjs && node scripts/security-headers.mjs",
     "dev:worker": "wrangler dev",
     "deploy": "npm run build && wrangler deploy",
     "preview": "astro preview"

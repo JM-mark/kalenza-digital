@@ -1,0 +1,25 @@
+---
+// Página 404 (servida pela Cloudflare para qualquer endereço inexistente): nos três idiomas, com saída para cada versão.
+import Base from '../layouts/Base.astro';
+import VideoBand from '../components/VideoBand.astro';
+import Split from '../components/Split.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Button from '../components/Button.astro';
+import { BASE } from '../lib/config';
+---
+<Base lang="pt" title="Página não encontrada · Kalenza Digital" description="Esta página não existe ou mudou de endereço." path="404/" noindex>
+  <VideoBand name="contato" hero labelledby="nf-title">
+    <div class="band">
+      <Eyebrow n="404">Kalenza Digital</Eyebrow>
+      <Split html="Página <i>não encontrada.</i>" as="h1" class="h1" id="nf-title" load />
+      <p class="lead muted load-rise" style="--d:220ms">Esta página não existe ou mudou de endereço.</p>
+      <p class="muted load-rise" style="--d:260ms" lang="en">This page doesn't exist or has moved.</p>
+      <p class="muted load-rise" style="--d:300ms" lang="ar" dir="rtl">هذه الصفحة غير موجودة أو تغيّر عنوانها.</p>
+      <div class="band__ctas load-rise" style="--d:360ms">
+        <Button href={`${BASE}/pt/`} variant="primary">Voltar ao início</Button>
+        <Button href={`${BASE}/en/`} variant="ghost">English</Button>
+        <Button href={`${BASE}/ar/`} variant="ghost">العربية</Button>
+      </div>
+    </div>
+  </VideoBand>
+</Base>

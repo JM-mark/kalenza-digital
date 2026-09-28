@@ -1,5 +1,5 @@
 ---
-// Raiz: na Netlify o redirecionamento por Accept-Language acontece antes (public/_redirects).
+// Raiz: na Cloudflare o Worker redireciona pelo Accept-Language antes (worker/index.ts).
 // Aqui fica o reserva em JS: escolha salva → ?lang= → idioma do navegador → PT.
 import { BUILD_LANGS, BASE } from '../lib/config';
 const langs = JSON.stringify(BUILD_LANGS);
