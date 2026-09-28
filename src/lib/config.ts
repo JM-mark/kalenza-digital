@@ -3,7 +3,7 @@
 export const SITE = {
   name: 'Kalenza Digital',
   domain: 'https://kalenzadigital.com' as string | null,
-  email: null as string | null,
+  email: 'contato@kalenzadigital.com' as string | null,
   instagram: null as string | null, // só o @, sem a URL
   whatsapp: '5519997429372',
   whatsappDisplay: '+55 19 99742-9372',
