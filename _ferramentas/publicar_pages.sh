@@ -4,6 +4,9 @@
 #   bash _ferramentas/publicar_pages.sh
 # Depois, gera de novo o build na raiz, para a prévia local (serve_dist.js) continuar funcionando.
 set -euo pipefail
+# DESATIVADO em 28/09/2026: o site está em https://kalenzadigital.com (npm run deploy). O branch gh-pages agora só
+# redireciona para o domínio oficial (noindex); publicar a prévia de novo criaria uma cópia duplicada no Google.
+if [ "${FORCAR_PREVIA:-}" != "1" ]; then echo "Prévia do GitHub Pages desativada. Use: npm run deploy"; exit 1; fi
 cd "$(dirname "$0")/.."
 BUN="${BUN:-$HOME/.bun/bin/bun.exe}"; [ -x "$BUN" ] || BUN=bun
 REMOTE=$(git remote get-url origin)
